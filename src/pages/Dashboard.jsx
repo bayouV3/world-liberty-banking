@@ -5,8 +5,9 @@ import PositionsList from "@/components/PositionsList";
 import TradeForm from "@/components/TradeForm";
 import PaymentForm from "@/components/PaymentForm";
 import PaymentsList from "@/components/PaymentsList";
+import AddMoneyForm from "@/components/AddMoneyForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart3, Send } from "lucide-react";
+import { BarChart3, Send, Wallet } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Dashboard() {
@@ -26,6 +27,13 @@ export default function Dashboard() {
     queryFn: () => base44.entities.Payment.list('-created_date')
   });
 
+  const { data: balanceList } = useQuery({
+    queryKey: ['balance'],
+    queryFn: () => base44.entities.Balance.list()
+  });
+
+  const balance = balanceList?.[0];
+
   return (
     <div className="min-h-screen bg-slate-950 p-4 md:p-8">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -40,6 +48,7 @@ export default function Dashboard() {
           <TabsList className="bg-slate-900 border border-slate-800">
             <TabsTrigger value="trade"><BarChart3 className="w-4 h-4 mr-2" />Trade</TabsTrigger>
             <TabsTrigger value="payments"><Send className="w-4 h-4 mr-2" />Payments</TabsTrigger>
+            <TabsTrigger value="wallet"><Wallet className="w-4 h-4 mr-2" />Wallet</TabsTrigger>
           </TabsList>
 
           <TabsContent value="trade" className="mt-6">
@@ -53,6 +62,12 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <PaymentForm user={user} />
               <PaymentsList payments={payments || []} user={user} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="wallet" className="mt-6">
+            <div className="max-w-md">
+              <AddMoneyForm balance={balance} />
             </div>
           </TabsContent>
         </Tabs>
