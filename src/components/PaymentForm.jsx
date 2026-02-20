@@ -36,7 +36,7 @@ export default function PaymentForm({ user }) {
   });
 
   return (
-    <Card className="bg-slate-900 border-slate-800">
+    <Card className="bg-white/5 border-white/10 backdrop-blur-lg rounded-2xl">
       <CardHeader className="pb-2">
         <Tabs value={type} onValueChange={setType}>
           <TabsList className="w-full bg-slate-800">
