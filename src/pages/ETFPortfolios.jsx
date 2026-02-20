@@ -3,8 +3,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Plus, TrendingUp } from "lucide-react";
-import CreateETFForm from "@/components/etf/CreateETFForm.js";
-import ETFCard from "@/components/etf/ETFCard.js";
+import CreateETFForm from "@/components/etf/CreateETFForm";
+import ETFCard from "@/components/etf/ETFCard";
 
 export default function ETFPortfolios() {
   const [showCreate, setShowCreate] = useState(false);
