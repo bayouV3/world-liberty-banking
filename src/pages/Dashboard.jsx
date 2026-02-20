@@ -69,7 +69,7 @@ export default function Dashboard() {
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-8">
 
-        <PortfolioStats positions={positions || []} />
+        <PortfolioStats holdings={positions || []} transactions={[]} />
 
         {/* ETF Portfolio Promo Banner */}
         <div className="relative overflow-hidden rounded-2xl border border-blue-500/20">
