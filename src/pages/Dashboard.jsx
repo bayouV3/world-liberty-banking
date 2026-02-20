@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import PortfolioStats from "@/components/PortfolioStats.js";
-import PositionsList from "@/components/PositionsList.js";
-import TradeForm from "@/components/TradeForm.js";
-import PaymentForm from "@/components/PaymentForm.js";
-import PaymentsList from "@/components/PaymentsList.js";
-import AddMoneyForm from "@/components/AddMoneyForm.js";
+import PortfolioStats from "@/components/dashboard/PortfolioStats.jsx";
+import PositionsList from "@/components/PositionsList";
+import TradeForm from "@/components/TradeForm";
+import PaymentForm from "@/components/PaymentForm";
+import PaymentsList from "@/components/PaymentsList";
+import AddMoneyForm from "@/components/AddMoneyForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart3, Send, Wallet, PieChart, ArrowRight, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
