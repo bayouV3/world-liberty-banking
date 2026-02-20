@@ -1,17 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import PortfolioStats from "@/components/PortfolioStats";
-import PositionsList from "@/components/PositionsList";
 import TradeForm from "@/components/TradeForm";
 import PaymentForm from "@/components/PaymentForm";
 import PaymentsList from "@/components/PaymentsList";
 import AddMoneyForm from "@/components/AddMoneyForm";
+import HeroBanner from "@/components/dashboard/HeroBanner";
+import StatsBar from "@/components/dashboard/StatsBar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart3, Send, Wallet, PieChart, ArrowRight, TrendingUp } from "lucide-react";
+import { BarChart3, Send, Wallet, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -35,110 +33,126 @@ export default function Dashboard() {
     queryFn: () => base44.entities.Balance.list()
   });
 
-  const { data: etfPortfolios } = useQuery({
-    queryKey: ['etf_portfolios'],
-    queryFn: () => base44.entities.ETFPortfolio.list('-created_date', 3)
-  });
-
   const balance = balanceList?.[0];
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-[#060810]">
       {/* Hero Banner */}
-      <div className="relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1600&q=80"
-          alt="Finance Hero"
-          className="w-full h-64 object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-slate-950/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-        <div className="absolute inset-0 flex items-center px-8 md:px-16">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-emerald-400 text-sm font-medium">Markets Open</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              Welcome{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''} 👋
-            </h1>
-            <p className="text-slate-400 text-lg">Your financial command center</p>
-          </div>
-        </div>
-      </div>
+      <HeroBanner user={user} balance={balance} positions={positions || []} />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-8">
+      {/* Stats Bar */}
+      <StatsBar positions={positions || []} balance={balance} />
 
-        <PortfolioStats positions={positions || []} />
-
-        {/* ETF Portfolio Promo Banner */}
-        <div className="relative overflow-hidden rounded-2xl border border-blue-500/20">
-          <img
-            src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80"
-            alt="ETF Portfolios"
-            className="absolute inset-0 w-full h-full object-cover opacity-15"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/90 via-slate-900/80 to-transparent" />
-          <div className="relative flex items-center justify-between p-6 gap-4">
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-2xl bg-blue-500/20 border border-blue-500/30 shrink-0">
-                <PieChart className="w-7 h-7 text-blue-400" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-white font-bold text-lg">Custom ETF Portfolios</h3>
-                  {etfPortfolios?.length > 0 && (
-                    <span className="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                      {etfPortfolios.length}
-                    </span>
-                  )}
-                </div>
-                <p className="text-slate-400 text-sm">Build diversified portfolios with custom asset allocations</p>
-              </div>
-            </div>
-            <Link to={createPageUrl("ETFPortfolios")}>
-              <Button className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 shrink-0">
-                <span className="hidden sm:inline">Manage Portfolios</span>
-                <ArrowRight className="w-4 h-4 sm:ml-2" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Main Tabs */}
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-10">
         <Tabs defaultValue="trade" className="w-full">
-          <TabsList className="bg-slate-900 border border-slate-800 h-12 p-1">
-            <TabsTrigger value="trade" className="data-[state=active]:bg-slate-700 text-slate-400 data-[state=active]:text-white">
-              <BarChart3 className="w-4 h-4 mr-2" />Trade
+          <TabsList className="bg-white/5 border border-white/10 backdrop-blur p-1 h-12 rounded-xl mb-8">
+            <TabsTrigger
+              value="trade"
+              className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg text-slate-400"
+            >
+              <BarChart3 className="w-4 h-4" />Trade
             </TabsTrigger>
-            <TabsTrigger value="payments" className="data-[state=active]:bg-slate-700 text-slate-400 data-[state=active]:text-white">
-              <Send className="w-4 h-4 mr-2" />Payments
+            <TabsTrigger
+              value="payments"
+              className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg text-slate-400"
+            >
+              <Send className="w-4 h-4" />Payments
             </TabsTrigger>
-            <TabsTrigger value="wallet" className="data-[state=active]:bg-slate-700 text-slate-400 data-[state=active]:text-white">
-              <Wallet className="w-4 h-4 mr-2" />Wallet
+            <TabsTrigger
+              value="wallet"
+              className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg text-slate-400"
+            >
+              <Wallet className="w-4 h-4" />Wallet
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="trade" className="mt-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TabsContent value="trade" className="mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+            >
               <TradeForm positions={positions || []} />
-              <PositionsList positions={positions || []} />
-            </div>
+              <PositionsPanel positions={positions || []} />
+            </motion.div>
           </TabsContent>
 
-          <TabsContent value="payments" className="mt-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TabsContent value="payments" className="mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+            >
               <PaymentForm user={user} />
               <PaymentsList payments={payments || []} user={user} />
-            </div>
+            </motion.div>
           </TabsContent>
 
-          <TabsContent value="wallet" className="mt-6">
-            <div className="max-w-md">
+          <TabsContent value="wallet" className="mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-md"
+            >
               <AddMoneyForm balance={balance} />
-            </div>
+            </motion.div>
           </TabsContent>
         </Tabs>
+      </div>
+    </div>
+  );
+}
+
+function PositionsPanel({ positions }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden">
+      <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+        <h2 className="font-semibold text-white text-lg">Positions</h2>
+        <span className="text-xs text-slate-400 bg-white/5 px-2 py-1 rounded-full">{positions.length} assets</span>
+      </div>
+      <div className="divide-y divide-white/5">
+        {positions.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 text-slate-500">
+            <BarChart3 className="w-10 h-10 mb-3 opacity-30" />
+            <p>No positions yet</p>
+          </div>
+        ) : (
+          positions.map((p, i) => {
+            const value = (p.quantity || 0) * (p.current_price || 0);
+            const cost = (p.quantity || 0) * (p.avg_cost || 0);
+            const pnl = value - cost;
+            const pct = cost > 0 ? (pnl / cost) * 100 : 0;
+            return (
+              <motion.div
+                key={p.id}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500/30 to-violet-600/30 border border-white/10 flex items-center justify-center text-xs font-bold text-blue-300">
+                    {p.symbol?.slice(0, 2)}
+                  </div>
+                  <div>
+                    <p className="font-medium text-white text-sm">{p.symbol}</p>
+                    <p className="text-xs text-slate-500">{p.quantity} shares</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">${value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                  <p className={`text-xs font-medium ${pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {pnl >= 0 ? '+' : ''}{pct.toFixed(2)}%
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })
+        )}
       </div>
     </div>
   );
