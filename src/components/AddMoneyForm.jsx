@@ -43,7 +43,7 @@ export default function AddMoneyForm({ balance }) {
   const quickAmounts = [50, 100, 250, 500, 1000];
 
   return (
-    <Card className="bg-slate-900 border-slate-800">
+    <Card className="bg-white/5 border-white/10 backdrop-blur-lg rounded-2xl">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
