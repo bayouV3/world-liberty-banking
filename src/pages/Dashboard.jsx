@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import PortfolioStats from "@/components/dashboard/PortfolioStats.jsx";
+import PortfolioStats from "@/components/dashboard/PortfolioStats";
 import PositionsList from "@/components/PositionsList";
 import TradeForm from "@/components/TradeForm";
 import PaymentForm from "@/components/PaymentForm";
