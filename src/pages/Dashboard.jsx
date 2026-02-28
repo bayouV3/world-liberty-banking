@@ -107,7 +107,7 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold"
-              style={{ background: "rgba(52,211,153,0.12)", color: "#34d399" }}>
+              style={{ background: "rgba(94,203,148,0.1)", color: "#5ecb94", border: "1px solid rgba(94,203,148,0.2)" }}>
               <TrendingUp className="w-3 h-3" />
               +${change.toLocaleString()} (+{changePct}%)
             </div>
@@ -116,15 +116,17 @@ export default function Dashboard() {
 
           {/* Balance breakdown pills */}
           <div className="flex gap-3 mt-5 flex-wrap">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.07] bg-white/[0.03] text-sm">
-              <div className="w-2 h-2 rounded-full bg-indigo-400" />
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-sm"
+              style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c" }}>
+              <div className="w-2 h-2 rounded-full" style={{ background: "#adb5bd" }} />
               <span className="text-slate-400">Cash</span>
-              <span className="text-white font-semibold">${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+              <span className="text-slate-100 font-semibold">${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.07] bg-white/[0.03] text-sm">
-              <div className="w-2 h-2 rounded-full bg-violet-400" />
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-sm"
+              style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c" }}>
+              <div className="w-2 h-2 rounded-full" style={{ background: "#7eb3ff" }} />
               <span className="text-slate-400">Investments</span>
-              <span className="text-white font-semibold">${portfolioValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+              <span className="text-slate-100 font-semibold">${portfolioValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
             </div>
           </div>
         </div>
