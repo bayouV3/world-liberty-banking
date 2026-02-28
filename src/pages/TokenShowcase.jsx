@@ -77,7 +77,7 @@ export default function TokenShowcase() {
         {/* Podium */}
         {!isLoading && holders.length >= 2 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-            className="rounded-2xl overflow-hidden" style={{ background: "#111118", border: "1px solid #1e2030" }}>
+            className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(145deg, #232628, #1e2022)", border: "1px solid #3a3d42" }}>
             <div className="px-5 pt-5 pb-2 flex items-center gap-2">
               <Crown className="w-4 h-4 text-amber-400" />
               <span className="text-sm font-bold text-slate-300 uppercase tracking-widest text-xs">Podium</span>
