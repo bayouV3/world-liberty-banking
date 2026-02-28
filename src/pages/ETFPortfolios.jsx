@@ -26,6 +26,7 @@ export default function ETFPortfolios() {
   });
 
   return (
+    <>
     <div className="min-h-screen bg-slate-950">
       {/* Hero Banner */}
       <div className="relative overflow-hidden">
