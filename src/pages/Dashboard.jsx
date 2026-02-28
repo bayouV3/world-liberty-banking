@@ -12,6 +12,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
+import TokenGate from "@/components/TokenGate";
+import WalletConnectModal from "@/components/WalletConnectModal";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);

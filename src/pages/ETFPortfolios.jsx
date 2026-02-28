@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Plus, TrendingUp } from "lucide-react";
 import CreateETFForm from "@/components/etf/CreateETFForm";
 import ETFCard from "@/components/etf/ETFCard";
+import TokenGate from "@/components/TokenGate";
+import WalletConnectModal from "@/components/WalletConnectModal";
 
 export default function ETFPortfolios() {
   const [showCreate, setShowCreate] = useState(false);
