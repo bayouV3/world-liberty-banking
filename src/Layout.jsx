@@ -22,24 +22,36 @@ export default function Layout({ children, currentPageName }) {
     : "WF";
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white" style={{ fontFamily: "'Inter', -apple-system, sans-serif" }}>
+    <div className="min-h-screen text-white" style={{ fontFamily: "'Inter', -apple-system, sans-serif", background: "#1a1c1e" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         * { font-family: 'Inter', -apple-system, sans-serif; box-sizing: border-box; }
-        body { background: #0a0a0f; }
+        body { background: #1a1c1e; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 4px; }
-        .neo-card { background: #111118; border: 1px solid #1e2030; border-radius: 16px; }
-        .neo-glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); }
-        .neo-btn-primary { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border: none; color: white; font-weight: 600; border-radius: 12px; transition: opacity 0.15s; }
-        .neo-btn-primary:hover { opacity: 0.88; }
-        .accent-indigo { color: #818cf8; }
-        .accent-emerald { color: #34d399; }
-        .accent-rose { color: #fb7185; }
-        .accent-amber { color: #fbbf24; }
-        .surface { background: #13131c; }
-        .surface-hover:hover { background: #1a1a28; }
+        ::-webkit-scrollbar-thumb { background: #3a3d42; border-radius: 4px; }
+
+        /* Steel palette */
+        .steel-bg { background: #1a1c1e; }
+        .steel-card { background: linear-gradient(145deg, #232628 0%, #1e2022 100%); border: 1px solid #3a3d42; border-radius: 16px; }
+        .steel-card-raised { background: linear-gradient(145deg, #2a2d30 0%, #202326 100%); border: 1px solid #44474c; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); }
+        .steel-glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.07); }
+        .steel-btn { background: linear-gradient(135deg, #4a4e55 0%, #35383d 100%); border: 1px solid #555960; color: #e8eaec; font-weight: 600; border-radius: 10px; transition: all 0.15s; }
+        .steel-btn:hover { background: linear-gradient(135deg, #565a62 0%, #3e4248 100%); }
+        .steel-btn-accent { background: linear-gradient(135deg, #5a7af0 0%, #7c5ff5 100%); border: 1px solid rgba(122,94,245,0.4); color: white; font-weight: 600; border-radius: 10px; transition: opacity 0.15s; }
+        .steel-btn-accent:hover { opacity: 0.88; }
+        .steel-shine { background: linear-gradient(135deg, #2e3236 0%, #24272a 50%, #2e3236 100%); }
+        .steel-divider { border-color: #2e3236; }
+
+        /* Accent colors — desaturated / metallic */
+        .accent-blue { color: #7eb3ff; }
+        .accent-green { color: #5ecb94; }
+        .accent-red { color: #e87070; }
+        .accent-amber { color: #d4a94a; }
+        .accent-silver { color: #adb5bd; }
+
+        .surface { background: #222528; }
+        .surface-hover:hover { background: #2a2d31; }
       `}</style>
 
       {/* Top navbar */}
