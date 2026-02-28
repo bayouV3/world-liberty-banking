@@ -69,7 +69,33 @@ export default function Dashboard() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 rounded-full pointer-events-none"
           style={{ background: "radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, transparent 70%)" }} />
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto relative">
+
+          {/* Crypto coin icons grid - upper right */}
+          <div className="absolute top-0 right-0 hidden sm:grid grid-cols-6 gap-2 pointer-events-none select-none">
+            {[
+              { symbol: "BTC", color: "#f7931a", bg: "rgba(247,147,26,0.15)", label: "₿" },
+              { symbol: "ETH", color: "#627eea", bg: "rgba(98,126,234,0.15)", label: "Ξ" },
+              { symbol: "SOL", color: "#9945ff", bg: "rgba(153,69,255,0.15)", label: "◎" },
+              { symbol: "BNB", color: "#f3ba2f", bg: "rgba(243,186,47,0.15)", label: "⬡" },
+              { symbol: "ADA", color: "#0033ad", bg: "rgba(0,100,255,0.15)", label: "₳" },
+              { symbol: "XRP", color: "#00aae4", bg: "rgba(0,170,228,0.15)", label: "✕" },
+              { symbol: "DOGE", color: "#c2a633", bg: "rgba(194,166,51,0.15)", label: "Ð" },
+              { symbol: "DOT", color: "#e6007a", bg: "rgba(230,0,122,0.15)", label: "●" },
+              { symbol: "AVAX", color: "#e84142", bg: "rgba(232,65,66,0.15)", label: "▲" },
+              { symbol: "LINK", color: "#2a5ada", bg: "rgba(42,90,218,0.15)", label: "⬡" },
+              { symbol: "LTC", color: "#bfbbbb", bg: "rgba(191,187,187,0.15)", label: "Ł" },
+              { symbol: "UNI", color: "#ff007a", bg: "rgba(255,0,122,0.15)", label: "🦄" },
+            ].map(({ symbol, color, bg, label }) => (
+              <div key={symbol}
+                className="w-10 h-10 rounded-xl flex flex-col items-center justify-center"
+                style={{ background: bg, border: `1px solid ${color}28` }}>
+                <span className="text-base leading-none" style={{ color }}>{label}</span>
+                <span className="text-[8px] font-bold mt-0.5" style={{ color: color + "99" }}>{symbol}</span>
+              </div>
+            ))}
+          </div>
+
           <p className="text-slate-500 text-sm font-medium mb-1">
             Good {new Date().getHours() < 12 ? "morning" : new Date().getHours() < 18 ? "afternoon" : "evening"}{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''} 👋
           </p>
