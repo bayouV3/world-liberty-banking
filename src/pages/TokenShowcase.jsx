@@ -104,7 +104,7 @@ export default function TokenShowcase() {
         {isLoading ? (
           <div className="space-y-3">
             {[1, 2, 3, 4, 5].map(i => (
-              <div key={i} className="h-20 rounded-2xl animate-pulse" style={{ background: "#111118" }} />
+              <div key={i} className="h-20 rounded-2xl animate-pulse" style={{ background: "#232628" }} />
             ))}
           </div>
         ) : filtered.length === 0 ? (
