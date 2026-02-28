@@ -109,8 +109,8 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.06] h-16 flex items-center px-4"
-        style={{ background: "rgba(10,10,15,0.97)", backdropFilter: "blur(24px)" }}>
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 h-16 flex items-center px-4"
+        style={{ background: "rgba(26,28,30,0.98)", backdropFilter: "blur(24px)", borderTop: "1px solid #3a3d42" }}>
         {navLinks.map(({ label, page, icon: Icon }) => {
           const active = currentPageName === page;
           return (
