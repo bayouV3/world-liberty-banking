@@ -39,10 +39,10 @@ export default function TokenShowcase() {
           </Link>
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-2 mb-3">
-            <div className="p-2 rounded-xl" style={{ background: "rgba(251,191,36,0.12)", border: "1px solid rgba(251,191,36,0.2)" }}>
-              <Trophy className="w-5 h-5 text-amber-400" />
+            <div className="p-2 rounded-xl" style={{ background: "linear-gradient(145deg, #333740, #282b2f)", border: "1px solid #44474c" }}>
+              <Trophy className="w-5 h-5 text-slate-300" />
             </div>
-            <span className="text-amber-400 font-semibold text-xs uppercase tracking-[0.15em]">Token Collector Showcase</span>
+            <span className="text-slate-400 font-semibold text-xs uppercase tracking-[0.15em]">Token Collector Showcase</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
             className="text-4xl md:text-5xl font-black text-white tracking-tight mb-2">
