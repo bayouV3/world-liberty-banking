@@ -168,10 +168,10 @@ export default function Dashboard() {
         </div>
 
         {/* ── Portfolio Analytics ───────────────────────────── */}
-        <div className="rounded-2xl border border-white/[0.07] bg-[#111118] overflow-hidden">
-          <div className="px-5 pt-5 pb-3 flex items-center justify-between">
-            <h2 className="text-white font-bold text-base">Portfolio Analytics</h2>
-            <span className="text-xs text-indigo-400 font-medium px-2.5 py-1 rounded-full" style={{ background: "rgba(99,102,241,0.12)" }}>Live</span>
+        <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(145deg, #232628, #1e2022)", border: "1px solid #3a3d42", boxShadow: "0 2px 16px rgba(0,0,0,0.3)" }}>
+          <div className="px-5 pt-5 pb-3 flex items-center justify-between" style={{ borderBottom: "1px solid #2e3236" }}>
+            <h2 className="text-slate-100 font-bold text-base">Portfolio Analytics</h2>
+            <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ background: "rgba(94,203,148,0.1)", color: "#5ecb94", border: "1px solid rgba(94,203,148,0.2)" }}>Live</span>
           </div>
           <PortfolioStats holdings={positions || []} transactions={[]} />
         </div>
