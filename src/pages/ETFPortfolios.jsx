@@ -59,6 +59,7 @@ export default function ETFPortfolios() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-6">
+        <TokenGate gateKey="etf_portfolios" tokenHolder={tokenHolder} onConnectWallet={() => setShowWalletModal(true)}>
         {showCreate && (
           <CreateETFForm
             onClose={() => setShowCreate(false)}

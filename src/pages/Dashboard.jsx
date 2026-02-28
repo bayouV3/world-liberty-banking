@@ -124,10 +124,12 @@ export default function Dashboard() {
           </TabsList>
 
           <TabsContent value="trade" className="mt-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <TradeForm positions={positions || []} />
-              <PositionsList positions={positions || []} />
-            </div>
+            <TokenGate gateKey="premium_analytics" tokenHolder={tokenHolder} onConnectWallet={() => setShowWalletModal(true)}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <TradeForm positions={positions || []} />
+                <PositionsList positions={positions || []} />
+              </div>
+            </TokenGate>
           </TabsContent>
 
           <TabsContent value="payments" className="mt-6">
@@ -144,6 +146,13 @@ export default function Dashboard() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {showWalletModal && (
+        <WalletConnectModal
+          onClose={() => setShowWalletModal(false)}
+          onConnected={(holder) => setTokenHolder(holder)}
+        />
+      )}
     </div>
   );
 }
