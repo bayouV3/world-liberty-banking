@@ -65,10 +65,10 @@ export default function Dashboard() {
 
       {/* ── Balance Hero ─────────────────────────────────────── */}
       <div className="relative px-5 pt-8 pb-6 overflow-hidden"
-        style={{ background: "linear-gradient(160deg, #0f0f1a 0%, #0a0a0f 100%)" }}>
-        {/* Background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, transparent 70%)" }} />
+        style={{ background: "linear-gradient(160deg, #232628 0%, #1a1c1e 100%)", borderBottom: "1px solid #3a3d42" }}>
+        {/* Steel sheen */}
+        <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)" }} />
 
         <div className="max-w-6xl mx-auto relative">
 
