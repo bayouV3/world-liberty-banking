@@ -13,6 +13,7 @@ export default function Layout({ children, currentPageName }) {
 
   const navLinks = [
     { label: "Dashboard", page: "Dashboard", icon: BarChart3 },
+    { label: "Token Showcase", page: "TokenShowcase", icon: Trophy },
   ];
 
   return (
