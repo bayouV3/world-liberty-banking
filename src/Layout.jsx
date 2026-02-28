@@ -55,8 +55,8 @@ export default function Layout({ children, currentPageName }) {
       `}</style>
 
       {/* Top navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center border-b border-white/[0.06]"
-        style={{ background: "rgba(10,10,15,0.92)", backdropFilter: "blur(24px)" }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center border-b"
+        style={{ background: "rgba(26,28,30,0.96)", backdropFilter: "blur(24px)", borderColor: "#3a3d42" }}>
         <div className="max-w-7xl mx-auto w-full px-5 flex items-center justify-between">
 
           {/* Logo */}
