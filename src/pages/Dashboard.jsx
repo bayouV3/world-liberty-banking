@@ -177,17 +177,18 @@ export default function Dashboard() {
         </div>
 
         {/* ── Main Tabs ─────────────────────────────────────── */}
-        <div className="rounded-2xl border border-white/[0.07] bg-[#111118] overflow-hidden">
+        <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(145deg, #232628, #1e2022)", border: "1px solid #3a3d42" }}>
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <div className="px-4 pt-4">
-              <TabsList className="w-full h-10 p-0.5 rounded-xl" style={{ background: "#0d0d15", border: "1px solid #1e2030" }}>
+              <TabsList className="w-full h-10 p-0.5 rounded-xl" style={{ background: "#161819", border: "1px solid #2e3236" }}>
                 {[
                   { value: "trade", icon: BarChart3, label: "Trade" },
                   { value: "payments", icon: Send, label: "Payments" },
                   { value: "wallet", icon: Wallet, label: "Wallet" },
                 ].map(({ value, icon: Icon, label }) => (
                   <TabsTrigger key={value} value={value}
-                    className="flex-1 h-9 rounded-lg text-sm font-medium data-[state=active]:bg-[#1e2030] data-[state=active]:text-white text-slate-500 gap-1.5 transition-all">
+                    className="flex-1 h-9 rounded-lg text-sm font-medium data-[state=active]:text-slate-100 text-slate-500 gap-1.5 transition-all"
+                    style={{ "--tw-data-active-bg": "linear-gradient(145deg, #2e3236, #262a2e)" }}>
                     <Icon className="w-3.5 h-3.5" />{label}
                   </TabsTrigger>
                 ))}
