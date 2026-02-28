@@ -10,6 +10,8 @@ import WalletConnectModal from "@/components/WalletConnectModal";
 
 export default function ETFPortfolios() {
   const [showCreate, setShowCreate] = useState(false);
+  const [tokenHolder, setTokenHolder] = useState(null);
+  const [showWalletModal, setShowWalletModal] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: portfolios, isLoading } = useQuery({

@@ -17,6 +17,8 @@ import WalletConnectModal from "@/components/WalletConnectModal";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
+  const [tokenHolder, setTokenHolder] = useState(null);
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
