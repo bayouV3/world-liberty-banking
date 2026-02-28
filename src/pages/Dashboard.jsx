@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
 import TokenGate from "@/components/TokenGate";
+import CoinBalanceWidgets from "@/components/dashboard/CoinBalanceWidgets";
 import WalletConnectModal from "@/components/WalletConnectModal";
 
 const QUICK_ACTIONS = [
