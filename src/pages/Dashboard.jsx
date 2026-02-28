@@ -132,6 +132,11 @@ export default function Dashboard() {
 
       <div className="max-w-6xl mx-auto px-4 md:px-5 space-y-6 pb-10">
 
+        {/* ── Coin Balance Widgets ──────────────────────────── */}
+        {positions?.length > 0 && (
+          <CoinBalanceWidgets positions={positions} />
+        )}
+
         {/* ── Quick Actions ─────────────────────────────────── */}
         <div className="grid grid-cols-4 gap-3">
           {QUICK_ACTIONS.map(({ icon: Icon, label, tab, href, color }) => (
