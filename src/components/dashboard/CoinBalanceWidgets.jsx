@@ -60,8 +60,8 @@ export default function CoinBalanceWidgets({ positions }) {
         <span className="text-xs text-slate-500">{cryptoPositions.length} assets</span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        {cryptoPositions.map(pos => {
-          const meta = COIN_COLORS[pos.symbol] || DEFAULT_COLOR;
+        {cryptoPositions.map((pos, i) => {
+          const meta = COIN_META[pos.symbol] || DEFAULT_META;
           const livePrice = prices[pos.symbol] || pos.current_price || pos.avg_cost;
           const value = pos.quantity * livePrice;
           const pl = value - pos.quantity * pos.avg_cost;
@@ -69,15 +69,18 @@ export default function CoinBalanceWidgets({ positions }) {
           const isUp = pl >= 0;
 
           return (
-            <div key={pos.id}
-              className="rounded-2xl p-4 flex flex-col gap-2 transition-all hover:scale-[1.02]"
-              style={{ background: "#111118", border: "1px solid #1e2030" }}>
+            <motion.div
+              key={pos.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.06, duration: 0.35 }}
+              whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
+              className="rounded-2xl p-4 flex flex-col gap-2 cursor-default"
+              style={{ background: "#111118", border: `1px solid ${meta.color}22` }}>
+
               {/* Icon + symbol */}
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold"
-                  style={{ background: meta.bg, color: meta.color }}>
-                  {meta.label}
-                </div>
+                <CoinIcon symbol={pos.symbol} color={meta.color} bg={meta.bg} />
                 <div>
                   <p className="text-white text-xs font-bold leading-tight">{pos.symbol}</p>
                   <p className="text-slate-600 text-[10px]">{pos.name || pos.symbol}</p>
@@ -99,7 +102,7 @@ export default function CoinBalanceWidgets({ positions }) {
                 {isUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                 {isUp ? "+" : ""}{plPct.toFixed(2)}%
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
