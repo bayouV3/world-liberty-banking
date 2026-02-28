@@ -1,21 +1,37 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, TrendingDown, BarChart3 } from "lucide-react";
+import { useState } from "react";
+import { TrendingUp, TrendingDown, BarChart3, History } from "lucide-react";
+import TradingHistoryModal from "@/components/trading/TradingHistoryModal";
 
 export default function PositionsList({ positions }) {
+  const [showHistory, setShowHistory] = useState(false);
+
   if (!positions?.length) {
     return (
       <div className="rounded-2xl p-6 text-center" style={{ background: "#0d0d15", border: "1px solid #1e2030" }}>
-        <h3 className="text-white font-bold mb-4">Positions</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-white font-bold">Positions</h3>
+          <button onClick={() => setShowHistory(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-all"
+            style={{ border: "1px solid #1e2030" }}>
+            <History className="w-3.5 h-3.5" /> History
+          </button>
+        </div>
         <BarChart3 className="w-10 h-10 mx-auto mb-2" style={{ color: "#1e2030" }} />
         <p className="text-slate-600 text-sm">No positions yet</p>
+        {showHistory && <TradingHistoryModal onClose={() => setShowHistory(false)} />}
       </div>
     );
   }
 
   return (
     <div className="rounded-2xl overflow-hidden" style={{ background: "#0d0d15", border: "1px solid #1e2030" }}>
-      <div className="px-4 pt-4 pb-2">
+      <div className="px-4 pt-4 pb-2 flex items-center justify-between">
         <h3 className="text-white font-bold">Positions</h3>
+        <button onClick={() => setShowHistory(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-all"
+          style={{ border: "1px solid #1e2030" }}>
+          <History className="w-3.5 h-3.5" /> History
+        </button>
       </div>
       <div className="p-4 pt-2 space-y-2">
         {positions.map((pos) => {
@@ -48,6 +64,8 @@ export default function PositionsList({ positions }) {
           );
         })}
       </div>
+
+      {showHistory && <TradingHistoryModal onClose={() => setShowHistory(false)} />}
     </div>
   );
 }
