@@ -12,7 +12,8 @@ export default function ETFPortfolios() {
 
   const { data: portfolios, isLoading } = useQuery({
     queryKey: ["etf_portfolios"],
-    queryFn: () => base44.entities.ETFPortfolio.list("-created_date")
+    queryFn: () => base44.entities.ETFPortfolio.list("-created_date"),
+    initialData: []
   });
 
   const deleteMutation = useMutation({
