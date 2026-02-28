@@ -57,39 +57,60 @@ export default function TradeForm({ positions }) {
   });
 
   return (
-    <Card className="bg-slate-900 border-slate-800">
-      <CardHeader className="pb-2">
-        <Tabs value={action} onValueChange={setAction}>
-          <TabsList className="w-full bg-slate-800">
-            <TabsTrigger value="buy" className="flex-1 data-[state=active]:bg-emerald-600"><ArrowDownLeft className="w-4 h-4 mr-1" />Buy</TabsTrigger>
-            <TabsTrigger value="sell" className="flex-1 data-[state=active]:bg-red-600"><ArrowUpRight className="w-4 h-4 mr-1" />Sell</TabsTrigger>
-          </TabsList>
-        </Tabs>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <Label className="text-slate-300">Asset</Label>
-          <Select value={symbol} onValueChange={setSymbol}>
-            <SelectTrigger className="bg-slate-800 border-slate-700 text-white"><SelectValue placeholder="Select asset" /></SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
-              {assets.map(a => <SelectItem key={a.symbol} value={a.symbol} className="text-white">{a.symbol} - ${a.price}</SelectItem>)}
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Label className="text-slate-300">Quantity</Label>
-          <Input type="number" value={quantity} onChange={e => setQuantity(e.target.value)} className="bg-slate-800 border-slate-700 text-white" placeholder="0" />
-        </div>
-        {totalValue > 0 && (
-          <div className="p-3 rounded-lg bg-slate-800 flex justify-between">
-            <span className="text-slate-400">Total</span>
-            <span className="font-bold text-white">${totalValue.toFixed(2)}</span>
+    <div className="rounded-2xl overflow-hidden" style={{ background: "#0d0d15", border: "1px solid #1e2030" }}>
+      <div className="p-4 pb-3">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-white font-bold">Place Order</h3>
+          <div className="flex rounded-xl overflow-hidden" style={{ border: "1px solid #1e2030" }}>
+            {["buy", "sell"].map(a => (
+              <button key={a} onClick={() => setAction(a)}
+                className="px-4 py-1.5 text-sm font-semibold transition-all capitalize"
+                style={action === a
+                  ? { background: a === "buy" ? "#059669" : "#e11d48", color: "white" }
+                  : { background: "transparent", color: "#64748b" }
+                }>
+                {a === "buy" ? <><ArrowDownLeft className="w-3.5 h-3.5 inline mr-1" />Buy</> : <><ArrowUpRight className="w-3.5 h-3.5 inline mr-1" />Sell</>}
+              </button>
+            ))}
           </div>
-        )}
-        <Button onClick={() => trade.mutate()} disabled={trade.isPending || !symbol || !quantity} className={`w-full ${action === 'buy' ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-red-600 hover:bg-red-700'}`}>
-          {trade.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : `${action === 'buy' ? 'Buy' : 'Sell'} ${symbol || 'Asset'}`}
-        </Button>
-      </CardContent>
-    </Card>
+        </div>
+        <div className="space-y-3">
+          <div>
+            <Label className="text-slate-500 text-xs mb-1.5 block">Asset</Label>
+            <Select value={symbol} onValueChange={setSymbol}>
+              <SelectTrigger className="h-11 text-white rounded-xl" style={{ background: "#111118", border: "1px solid #1e2030" }}>
+                <SelectValue placeholder="Select asset" />
+              </SelectTrigger>
+              <SelectContent style={{ background: "#111118", border: "1px solid #1e2030" }}>
+                {assets.map(a => (
+                  <SelectItem key={a.symbol} value={a.symbol} className="text-white focus:bg-white/10">
+                    <span className="font-semibold">{a.symbol}</span>
+                    <span className="text-slate-400 ml-2">${a.price}</span>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label className="text-slate-500 text-xs mb-1.5 block">Quantity</Label>
+            <Input type="number" value={quantity} onChange={e => setQuantity(e.target.value)}
+              className="h-11 text-white rounded-xl"
+              style={{ background: "#111118", border: "1px solid #1e2030" }}
+              placeholder="0" />
+          </div>
+          {totalValue > 0 && (
+            <div className="flex justify-between items-center px-4 py-3 rounded-xl" style={{ background: "#111118", border: "1px solid #1e2030" }}>
+              <span className="text-slate-500 text-sm">Total</span>
+              <span className="font-bold text-white">${totalValue.toFixed(2)}</span>
+            </div>
+          )}
+          <button onClick={() => trade.mutate()} disabled={trade.isPending || !symbol || !quantity}
+            className="w-full h-11 rounded-xl font-semibold text-white text-sm transition-opacity disabled:opacity-40"
+            style={{ background: action === 'buy' ? "#059669" : "#e11d48" }}>
+            {trade.isPending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : `${action === 'buy' ? 'Buy' : 'Sell'} ${symbol || 'Asset'}`}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
