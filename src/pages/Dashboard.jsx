@@ -221,18 +221,19 @@ export default function Dashboard() {
 
         {/* ── ETF Portfolio Banner ──────────────────────────── */}
         <div className="relative overflow-hidden rounded-2xl p-5 flex items-center justify-between gap-4"
-          style={{ background: "linear-gradient(135deg, #1a1040 0%, #0f0f1a 100%)", border: "1px solid rgba(99,102,241,0.25)" }}>
-          <div className="absolute top-0 right-0 w-64 h-full opacity-10 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at right, #6366f1, transparent)" }} />
+          style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)" }}>
+          <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)" }} />
           <div className="flex items-center gap-4 relative z-10">
-            <div className="p-3 rounded-xl" style={{ background: "rgba(99,102,241,0.15)", border: "1px solid rgba(99,102,241,0.25)" }}>
-              <PieChart className="w-6 h-6 text-indigo-400" />
+            <div className="p-3 rounded-xl" style={{ background: "linear-gradient(145deg, #333740, #282b2f)", border: "1px solid #44474c" }}>
+              <PieChart className="w-6 h-6 text-slate-300" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-0.5">
-                <h3 className="text-white font-bold">Custom ETF Portfolios</h3>
+                <h3 className="text-slate-100 font-bold">Custom ETF Portfolios</h3>
                 {etfPortfolios?.length > 0 && (
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-600 text-white">
+                  <span className="text-xs font-bold px-2 py-0.5 rounded-full text-slate-200"
+                    style={{ background: "linear-gradient(145deg, #44474c, #35383d)" }}>
                     {etfPortfolios.length}
                   </span>
                 )}
@@ -241,8 +242,8 @@ export default function Dashboard() {
             </div>
           </div>
           <Link to={createPageUrl("ETFPortfolios")} className="relative z-10 shrink-0">
-            <Button className="text-white text-sm font-semibold h-9 px-4 rounded-xl gap-1.5"
-              style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", border: "none" }}>
+            <Button className="text-slate-100 text-sm font-semibold h-9 px-4 rounded-xl gap-1.5"
+              style={{ background: "linear-gradient(145deg, #4a4e57, #35383d)", border: "1px solid #555960" }}>
               <span className="hidden sm:inline">Manage</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
