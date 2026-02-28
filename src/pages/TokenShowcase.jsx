@@ -90,10 +90,10 @@ export default function TokenShowcase() {
         <div className="flex gap-2 flex-wrap">
           {FILTERS.map(f => (
             <button key={f} onClick={() => setFilter(f)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium border transition-all"
+              className="px-4 py-1.5 rounded-full text-sm font-medium transition-all"
               style={filter === f
-                ? { background: "linear-gradient(135deg, #6366f1, #8b5cf6)", border: "none", color: "white" }
-                : { background: "transparent", border: "1px solid #1e2030", color: "#64748b" }
+                ? { background: "linear-gradient(145deg, #4a4e57, #35383d)", border: "1px solid #555960", color: "#e8eaec" }
+                : { background: "transparent", border: "1px solid #2e3236", color: "#64748b" }
               }>
               {f}
             </button>
