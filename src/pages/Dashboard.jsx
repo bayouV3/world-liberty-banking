@@ -141,23 +141,25 @@ export default function Dashboard() {
 
         {/* ── Quick Actions ─────────────────────────────────── */}
         <div className="grid grid-cols-4 gap-3">
-          {QUICK_ACTIONS.map(({ icon: Icon, label, tab, href, color }) => (
+          {QUICK_ACTIONS.map(({ icon: Icon, label, tab, href }) => (
             href ? (
               <Link key={label} to={createPageUrl(href)}>
-                <button className="w-full flex flex-col items-center gap-2 py-4 rounded-2xl border border-white/[0.07] bg-[#111118] hover:bg-[#1a1a28] transition-all active:scale-95">
+                <button className="w-full flex flex-col items-center gap-2 py-4 rounded-2xl transition-all active:scale-95"
+                  style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}>
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: `${color}18` }}>
-                    <Icon className="w-5 h-5" style={{ color }} />
+                    style={{ background: "linear-gradient(145deg, #333740, #282b2f)", border: "1px solid #44474c" }}>
+                    <Icon className="w-5 h-5 text-slate-300" />
                   </div>
                   <span className="text-xs text-slate-400 font-medium">{label}</span>
                 </button>
               </Link>
             ) : (
               <button key={label} onClick={() => setActiveTab(tab)}
-                className="flex flex-col items-center gap-2 py-4 rounded-2xl border border-white/[0.07] bg-[#111118] hover:bg-[#1a1a28] transition-all active:scale-95">
+                className="flex flex-col items-center gap-2 py-4 rounded-2xl transition-all active:scale-95"
+                style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ background: `${color}18` }}>
-                  <Icon className="w-5 h-5" style={{ color }} />
+                  style={{ background: "linear-gradient(145deg, #333740, #282b2f)", border: "1px solid #44474c" }}>
+                  <Icon className="w-5 h-5 text-slate-300" />
                 </div>
                 <span className="text-xs text-slate-400 font-medium">{label}</span>
               </button>
