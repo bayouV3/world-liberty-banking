@@ -62,11 +62,11 @@ export default function Layout({ children, currentPageName }) {
           {/* Logo */}
           <Link to={createPageUrl("Dashboard")} className="flex items-center gap-2.5 mr-8">
             <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
-              <Zap className="w-3.5 h-3.5 text-white" />
+              style={{ background: "linear-gradient(145deg, #4a4e57, #2e3236)", border: "1px solid #555960", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }}>
+              <Zap className="w-3.5 h-3.5 text-slate-200" />
             </div>
             <span className="font-bold text-base tracking-tight">
-              <span className="text-white">World</span><span className="text-indigo-400">Fi</span>
+              <span className="text-slate-100">World</span><span className="text-slate-400">Fi</span>
             </span>
           </Link>
 
