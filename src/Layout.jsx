@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { BarChart3, Trophy, Zap, Bell, User } from "lucide-react";
+import { BarChart3, Trophy, Zap, Bell, User, CreditCard, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 
@@ -12,66 +12,82 @@ export default function Layout({ children, currentPageName }) {
   }, []);
 
   const navLinks = [
-    { label: "Dashboard", page: "Dashboard", icon: BarChart3 },
-    { label: "Token Showcase", page: "TokenShowcase", icon: Trophy },
+    { label: "Home", page: "Dashboard", icon: Home },
+    { label: "Portfolios", page: "ETFPortfolios", icon: CreditCard },
+    { label: "Showcase", page: "TokenShowcase", icon: Trophy },
   ];
 
+  const initials = user?.full_name
+    ? user.full_name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()
+    : "WF";
+
   return (
-    <div className="min-h-screen bg-[#060810] text-white font-sans">
+    <div className="min-h-screen bg-[#0a0a0f] text-white" style={{ fontFamily: "'Inter', -apple-system, sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        * { font-family: 'Inter', sans-serif; }
-        .glow-blue { box-shadow: 0 0 40px rgba(59,130,246,0.15); }
-        .glow-text { text-shadow: 0 0 30px rgba(99,179,237,0.5); }
-        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
-        .gradient-border { background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3)); }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #060810; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        * { font-family: 'Inter', -apple-system, sans-serif; box-sizing: border-box; }
+        body { background: #0a0a0f; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 4px; }
+        .neo-card { background: #111118; border: 1px solid #1e2030; border-radius: 16px; }
+        .neo-glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); }
+        .neo-btn-primary { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border: none; color: white; font-weight: 600; border-radius: 12px; transition: opacity 0.15s; }
+        .neo-btn-primary:hover { opacity: 0.88; }
+        .accent-indigo { color: #818cf8; }
+        .accent-emerald { color: #34d399; }
+        .accent-rose { color: #fb7185; }
+        .accent-amber { color: #fbbf24; }
+        .surface { background: #13131c; }
+        .surface-hover:hover { background: #1a1a28; }
       `}</style>
 
       {/* Top navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center border-b border-white/[0.06]"
+        style={{ background: "rgba(10,10,15,0.92)", backdropFilter: "blur(24px)" }}>
+        <div className="max-w-7xl mx-auto w-full px-5 flex items-center justify-between">
+
           {/* Logo */}
-          <Link to={createPageUrl("Dashboard")} className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-white" />
+          <Link to={createPageUrl("Dashboard")} className="flex items-center gap-2.5 mr-8">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+              style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
+              <Zap className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-lg font-bold tracking-tight">
-              <span className="text-white">World</span>
-              <span className="text-blue-400">Fi</span>
+            <span className="font-bold text-base tracking-tight">
+              <span className="text-white">World</span><span className="text-indigo-400">Fi</span>
             </span>
           </Link>
 
-          {/* Nav links */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(({ label, page, icon: Icon }) => (
-              <Link
-                key={page}
-                to={createPageUrl(page)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
-                  ${currentPageName === page
-                    ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"}`}
-              >
-                <Icon className="w-4 h-4" />
-                {label}
-              </Link>
-            ))}
+          {/* Nav */}
+          <div className="hidden md:flex items-center gap-0.5 flex-1">
+            {navLinks.map(({ label, page, icon: Icon }) => {
+              const active = currentPageName === page;
+              return (
+                <Link
+                  key={page}
+                  to={createPageUrl(page)}
+                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all
+                    ${active ? "text-white bg-white/[0.08]" : "text-slate-500 hover:text-slate-200 hover:bg-white/[0.04]"}`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Right side */}
-          <div className="flex items-center gap-3">
-            <button className="relative p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+          {/* Right */}
+          <div className="flex items-center gap-2">
+            <button className="relative p-2 rounded-lg text-slate-500 hover:text-white hover:bg-white/[0.05] transition-all">
+              <Bell className="w-4 h-4" />
+              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
             </button>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg glass cursor-pointer hover:bg-white/5 transition-all">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
-                <User className="w-3 h-3 text-white" />
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl cursor-pointer hover:bg-white/[0.05] transition-all border border-white/[0.06]">
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
+                {initials}
               </div>
-              <span className="text-sm text-slate-300 hidden md:block">
+              <span className="text-sm text-slate-300 hidden md:block font-medium">
                 {user?.full_name?.split(' ')[0] || "Account"}
               </span>
             </div>
@@ -79,8 +95,24 @@ export default function Layout({ children, currentPageName }) {
         </div>
       </nav>
 
+      {/* Mobile bottom nav */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.06] h-16 flex items-center px-4"
+        style={{ background: "rgba(10,10,15,0.97)", backdropFilter: "blur(24px)" }}>
+        {navLinks.map(({ label, page, icon: Icon }) => {
+          const active = currentPageName === page;
+          return (
+            <Link key={page} to={createPageUrl(page)}
+              className={`flex-1 flex flex-col items-center gap-1 py-1 transition-all
+                ${active ? "text-indigo-400" : "text-slate-600 hover:text-slate-400"}`}>
+              <Icon className="w-5 h-5" />
+              <span className="text-[10px] font-medium">{label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
       {/* Page content */}
-      <main className="pt-16">
+      <main className="pt-14 pb-16 md:pb-0">
         {children}
       </main>
     </div>

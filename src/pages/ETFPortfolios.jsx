@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
-import { Plus, TrendingUp } from "lucide-react";
+import { Plus, TrendingUp, PieChart, ArrowLeft } from "lucide-react";
 import CreateETFForm from "@/components/etf/CreateETFForm";
 import ETFCard from "@/components/etf/ETFCard";
 import TokenGate from "@/components/TokenGate";
 import WalletConnectModal from "@/components/WalletConnectModal";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 
 export default function ETFPortfolios() {
   const [showCreate, setShowCreate] = useState(false);
@@ -27,91 +29,93 @@ export default function ETFPortfolios() {
 
   return (
     <>
-    <div className="min-h-screen bg-slate-950">
-      {/* Hero Banner */}
-      <div className="relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600&q=80"
-          alt="Finance Banner"
-          className="w-full h-56 object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent" />
-        <div className="absolute inset-0 flex items-center px-8 md:px-16">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 rounded-xl bg-blue-500/20 border border-blue-500/30">
-                <TrendingUp className="w-6 h-6 text-blue-400" />
+      <div className="min-h-screen bg-[#0a0a0f]">
+        {/* ── Page Header ─────────────────────────────────── */}
+        <div className="relative px-5 pt-8 pb-8 overflow-hidden"
+          style={{ background: "linear-gradient(160deg, #0f0f1a 0%, #0a0a0f 100%)" }}>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.1) 0%, transparent 70%)" }} />
+          <div className="max-w-6xl mx-auto relative z-10">
+            <Link to={createPageUrl("Dashboard")} className="inline-flex items-center gap-1.5 text-slate-500 hover:text-slate-300 text-sm mb-5 transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" /> Back
+            </Link>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-2xl" style={{ background: "rgba(139,92,246,0.15)", border: "1px solid rgba(139,92,246,0.25)" }}>
+                  <PieChart className="w-7 h-7 text-violet-400" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-black text-white tracking-tight">ETF Portfolios</h1>
+                  <p className="text-slate-500 text-sm mt-0.5">Build and manage diversified index-style portfolios</p>
+                </div>
               </div>
-              <span className="text-blue-400 font-semibold text-sm uppercase tracking-widest">Custom ETFs</span>
+              <Button
+                onClick={() => setShowCreate(true)}
+                className="text-white font-semibold h-10 px-5 rounded-xl gap-2 shrink-0"
+                style={{ background: "linear-gradient(135deg, #8b5cf6, #6366f1)", border: "none" }}
+              >
+                <Plus className="w-4 h-4" />
+                <span className="hidden sm:inline">New Portfolio</span>
+              </Button>
             </div>
-            <h1 className="text-4xl font-bold text-white mb-1">My Portfolios</h1>
-            <p className="text-slate-400 text-lg">Build and manage diversified ETF-style portfolios</p>
           </div>
         </div>
-        <div className="absolute top-4 right-8">
-          <Button
-            onClick={() => setShowCreate(true)}
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            New Portfolio
-          </Button>
+
+        <div className="max-w-6xl mx-auto px-4 md:px-5 py-6">
+          <TokenGate gateKey="etf_portfolios" tokenHolder={tokenHolder} onConnectWallet={() => setShowWalletModal(true)}>
+            {showCreate && (
+              <div className="mb-6">
+                <CreateETFForm
+                  onClose={() => setShowCreate(false)}
+                  onCreated={() => {
+                    setShowCreate(false);
+                    queryClient.invalidateQueries({ queryKey: ["etf_portfolios"] });
+                  }}
+                />
+              </div>
+            )}
+
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="h-64 rounded-2xl animate-pulse" style={{ background: "#111118" }} />
+                ))}
+              </div>
+            ) : portfolios?.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-28 text-center">
+                <div className="p-6 rounded-3xl mb-6" style={{ background: "rgba(139,92,246,0.1)", border: "1px solid rgba(139,92,246,0.2)" }}>
+                  <PieChart className="w-12 h-12 text-violet-400 mx-auto" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">No portfolios yet</h3>
+                <p className="text-slate-500 mb-6 text-sm max-w-xs">Create your first custom ETF-style portfolio to start building wealth</p>
+                <Button onClick={() => setShowCreate(true)}
+                  className="text-white font-semibold h-10 px-6 rounded-xl gap-2"
+                  style={{ background: "linear-gradient(135deg, #8b5cf6, #6366f1)", border: "none" }}>
+                  <Plus className="w-4 h-4" />
+                  Create Portfolio
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {portfolios.map(portfolio => (
+                  <ETFCard
+                    key={portfolio.id}
+                    portfolio={portfolio}
+                    onDelete={() => deleteMutation.mutate(portfolio.id)}
+                  />
+                ))}
+              </div>
+            )}
+          </TokenGate>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-6">
-        <TokenGate gateKey="etf_portfolios" tokenHolder={tokenHolder} onConnectWallet={() => setShowWalletModal(true)}>
-        {showCreate && (
-          <CreateETFForm
-            onClose={() => setShowCreate(false)}
-            onCreated={() => {
-              setShowCreate(false);
-              queryClient.invalidateQueries({ queryKey: ["etf_portfolios"] });
-            }}
-          />
-        )}
-
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="h-64 rounded-2xl bg-slate-900 animate-pulse" />
-            ))}
-          </div>
-        ) : portfolios?.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <img
-              src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&q=80"
-              alt="Empty"
-              className="w-32 h-32 rounded-2xl object-cover opacity-40 mb-6"
-            />
-            <h3 className="text-xl font-semibold text-white mb-2">No portfolios yet</h3>
-            <p className="text-slate-400 mb-6">Create your first custom ETF-style portfolio</p>
-            <Button onClick={() => setShowCreate(true)} className="bg-blue-600 hover:bg-blue-500">
-              <Plus className="w-4 h-4 mr-2" />
-              Create Portfolio
-            </Button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {portfolios.map(portfolio => (
-              <ETFCard
-                key={portfolio.id}
-                portfolio={portfolio}
-                onDelete={() => deleteMutation.mutate(portfolio.id)}
-              />
-            ))}
-          </div>
-        )}
-        </TokenGate>
-      </div>
-    </div>
-
-    {showWalletModal && (
-      <WalletConnectModal
-        onClose={() => setShowWalletModal(false)}
-        onConnected={(holder) => setTokenHolder(holder)}
-      />
-    )}
+      {showWalletModal && (
+        <WalletConnectModal
+          onClose={() => setShowWalletModal(false)}
+          onConnected={(holder) => setTokenHolder(holder)}
+        />
+      )}
     </>
   );
 }
