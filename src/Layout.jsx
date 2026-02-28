@@ -116,7 +116,7 @@ export default function Layout({ children, currentPageName }) {
           return (
             <Link key={page} to={createPageUrl(page)}
               className={`flex-1 flex flex-col items-center gap-1 py-1 transition-all
-                ${active ? "text-indigo-400" : "text-slate-600 hover:text-slate-400"}`}>
+                ${active ? "text-slate-200" : "text-slate-600 hover:text-slate-400"}`}>
               <Icon className="w-5 h-5" />
               <span className="text-[10px] font-medium">{label}</span>
             </Link>
