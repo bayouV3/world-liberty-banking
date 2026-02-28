@@ -27,12 +27,12 @@ export default function TokenShowcase() {
   const totalValue = holders.reduce((s, h) => s + (h.token_value_usd ?? 0), 0);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen text-white" style={{ background: "#1a1c1e" }}>
       {/* ── Header ──────────────────────────────────────── */}
       <div className="relative px-5 pt-8 pb-10 overflow-hidden"
-        style={{ background: "linear-gradient(160deg, #0f0e1a 0%, #0a0a0f 100%)" }}>
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-64 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, rgba(251,191,36,0.08) 0%, transparent 70%)" }} />
+        style={{ background: "linear-gradient(145deg, #232628, #1e2022)", borderBottom: "1px solid #3a3d42" }}>
+        <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)" }} />
         <div className="max-w-4xl mx-auto relative z-10">
           <Link to={createPageUrl("Dashboard")} className="inline-flex items-center gap-1.5 text-slate-500 hover:text-slate-300 text-sm mb-5 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> Back
