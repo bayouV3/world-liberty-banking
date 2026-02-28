@@ -79,7 +79,7 @@ export default function Layout({ children, currentPageName }) {
                   key={page}
                   to={createPageUrl(page)}
                   className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all
-                    ${active ? "text-white bg-white/[0.08]" : "text-slate-500 hover:text-slate-200 hover:bg-white/[0.04]"}`}
+                    ${active ? "text-slate-100 bg-white/[0.07]" : "text-slate-500 hover:text-slate-300 hover:bg-white/[0.04]"}`}
                 >
                   <Icon className="w-3.5 h-3.5" />
                   {label}
@@ -90,13 +90,14 @@ export default function Layout({ children, currentPageName }) {
 
           {/* Right */}
           <div className="flex items-center gap-2">
-            <button className="relative p-2 rounded-lg text-slate-500 hover:text-white hover:bg-white/[0.05] transition-all">
+            <button className="relative p-2 rounded-lg text-slate-500 hover:text-slate-300 transition-all" style={{ background: "rgba(255,255,255,0.03)" }}>
               <Bell className="w-4 h-4" />
-              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
+              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
             </button>
-            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl cursor-pointer hover:bg-white/[0.05] transition-all border border-white/[0.06]">
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl cursor-pointer transition-all"
+              style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c" }}>
               <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
+                style={{ background: "linear-gradient(145deg, #4a4e57, #2e3236)", border: "1px solid #555960" }}>
                 {initials}
               </div>
               <span className="text-sm text-slate-300 hidden md:block font-medium">
