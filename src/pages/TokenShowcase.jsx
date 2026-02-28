@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import { Trophy, Coins, Users, Flame } from "lucide-react";
+import { Trophy, Coins, Users, Flame, Crown } from "lucide-react";
 import { motion } from "framer-motion";
 import LeaderboardRow from "@/components/showcase/LeaderboardRow";
 import TopHolderCard from "@/components/showcase/TopHolderCard";
