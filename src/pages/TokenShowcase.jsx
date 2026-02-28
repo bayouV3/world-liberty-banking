@@ -60,12 +60,12 @@ export default function TokenShowcase() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
           className="grid grid-cols-3 gap-3">
           {[
-            { icon: Users, label: "Collectors", value: holders.length, color: "#818cf8", bg: "rgba(99,102,241,0.1)" },
-            { icon: Coins, label: "Total Tokens", value: totalTokens.toLocaleString(), color: "#fbbf24", bg: "rgba(251,191,36,0.1)" },
-            { icon: Flame, label: "Total Value", value: "$" + (totalValue / 1000).toFixed(1) + "K", color: "#34d399", bg: "rgba(52,211,153,0.1)" },
+            { icon: Users, label: "Collectors", value: holders.length, color: "#adb5bd", bg: "linear-gradient(145deg, #333740, #282b2f)" },
+            { icon: Coins, label: "Total Tokens", value: totalTokens.toLocaleString(), color: "#d4a94a", bg: "linear-gradient(145deg, #333740, #282b2f)" },
+            { icon: Flame, label: "Total Value", value: "$" + (totalValue / 1000).toFixed(1) + "K", color: "#5ecb94", bg: "linear-gradient(145deg, #333740, #282b2f)" },
           ].map(({ icon: Icon, label, value, color, bg }) => (
-            <div key={label} className="rounded-2xl p-4 text-center" style={{ background: "#111118", border: "1px solid #1e2030" }}>
-              <div className="w-9 h-9 rounded-xl mx-auto mb-2 flex items-center justify-center" style={{ background: bg }}>
+            <div key={label} className="rounded-2xl p-4 text-center" style={{ background: "linear-gradient(145deg, #2a2d30, #202326)", border: "1px solid #44474c" }}>
+              <div className="w-9 h-9 rounded-xl mx-auto mb-2 flex items-center justify-center" style={{ background: bg, border: "1px solid #44474c" }}>
                 <Icon className="w-4 h-4" style={{ color }} />
               </div>
               <div className="text-lg font-bold text-white">{value}</div>
