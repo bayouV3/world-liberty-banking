@@ -49,12 +49,14 @@
  */
 import Dashboard from './pages/Dashboard';
 import ETFPortfolios from './pages/ETFPortfolios';
+import TokenShowcase from './pages/TokenShowcase';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Dashboard": Dashboard,
     "ETFPortfolios": ETFPortfolios,
+    "TokenShowcase": TokenShowcase,
 }
 
 export const pagesConfig = {
