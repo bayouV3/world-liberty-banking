@@ -107,11 +107,11 @@ export default function ETFPortfolios() {
     </div>
 
     {showWalletModal && (
-        <WalletConnectModal
-          onClose={() => setShowWalletModal(false)}
-          onConnected={(holder) => setTokenHolder(holder)}
-        />
-      )}
-    </div>
+      <WalletConnectModal
+        onClose={() => setShowWalletModal(false)}
+        onConnected={(holder) => setTokenHolder(holder)}
+      />
+    )}
+    </>
   );
 }
