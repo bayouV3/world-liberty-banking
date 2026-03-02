@@ -49,8 +49,8 @@
  */
 import Dashboard from './pages/Dashboard';
 import ETFPortfolios from './pages/ETFPortfolios';
-import TokenShowcase from './pages/TokenShowcase';
 import Terminal from './pages/Terminal';
+import TokenShowcase from './pages/TokenShowcase';
 import Watchlist from './pages/Watchlist';
 import __Layout from './Layout.jsx';
 
@@ -58,8 +58,8 @@ import __Layout from './Layout.jsx';
 export const PAGES = {
     "Dashboard": Dashboard,
     "ETFPortfolios": ETFPortfolios,
-    "TokenShowcase": TokenShowcase,
     "Terminal": Terminal,
+    "TokenShowcase": TokenShowcase,
     "Watchlist": Watchlist,
 }
 
