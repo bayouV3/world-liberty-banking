@@ -50,6 +50,7 @@
 import Dashboard from './pages/Dashboard';
 import ETFPortfolios from './pages/ETFPortfolios';
 import TokenShowcase from './pages/TokenShowcase';
+import Terminal from './pages/Terminal';
 import __Layout from './Layout.jsx';
 
 
@@ -57,6 +58,7 @@ export const PAGES = {
     "Dashboard": Dashboard,
     "ETFPortfolios": ETFPortfolios,
     "TokenShowcase": TokenShowcase,
+    "Terminal": Terminal,
 }
 
 export const pagesConfig = {
