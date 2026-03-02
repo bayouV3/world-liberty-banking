@@ -15,6 +15,7 @@ export default function Layout({ children, currentPageName }) {
     { label: "Home", page: "Dashboard", icon: Home },
     { label: "Portfolios", page: "ETFPortfolios", icon: CreditCard },
     { label: "Showcase", page: "TokenShowcase", icon: Trophy },
+    { label: "Terminal", page: "Terminal", icon: Monitor },
   ];
 
   const initials = user?.full_name
