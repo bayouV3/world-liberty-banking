@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { BarChart3, Trophy, Zap, Bell, User, CreditCard, Home, Monitor } from "lucide-react";
+import { BarChart3, Trophy, Zap, Bell, User, CreditCard, Home, Monitor, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 
