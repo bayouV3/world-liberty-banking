@@ -134,22 +134,50 @@ export default function TradeForm({ positions }) {
           {/* Asset select with live price */}
           <div>
             <Label className="text-slate-500 text-xs mb-1.5 block">Asset</Label>
-            <Select value={symbol} onValueChange={setSymbol}>
-              <SelectTrigger className="h-11 text-white rounded-xl" style={{ background: "#111118", border: "1px solid #1e2030" }}>
-                <SelectValue placeholder="Select asset" />
-              </SelectTrigger>
-              <SelectContent style={{ background: "#111118", border: "1px solid #1e2030" }}>
-                {ASSETS.map(a => (
-                  <SelectItem key={a.symbol} value={a.symbol} className="text-white focus:bg-white/10">
-                    <span className="font-semibold">{a.symbol}</span>
-                    <span className="text-slate-400 ml-2 text-xs">{a.name}</span>
-                    {prices[a.symbol] && (
-                      <span className="text-indigo-300 ml-2 text-xs">${prices[a.symbol].toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
-                    )}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            {isMobile ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setShowDrawer(true)}
+                  className="w-full h-11 rounded-xl flex items-center justify-between px-3 text-sm"
+                  style={{ background: "#111118", border: "1px solid #1e2030" }}
+                >
+                  {symbol ? (
+                    <span className="text-white font-semibold">
+                      {symbol} <span className="text-slate-400 font-normal text-xs ml-1">{asset?.name}</span>
+                    </span>
+                  ) : (
+                    <span className="text-slate-500">Select asset</span>
+                  )}
+                  <ChevronDown className="w-4 h-4 text-slate-500" />
+                </button>
+                <AssetDrawer
+                  open={showDrawer}
+                  onClose={() => setShowDrawer(false)}
+                  assets={ASSETS}
+                  prices={prices}
+                  selectedSymbol={symbol}
+                  onSelect={setSymbol}
+                />
+              </>
+            ) : (
+              <Select value={symbol} onValueChange={setSymbol}>
+                <SelectTrigger className="h-11 text-white rounded-xl" style={{ background: "#111118", border: "1px solid #1e2030" }}>
+                  <SelectValue placeholder="Select asset" />
+                </SelectTrigger>
+                <SelectContent style={{ background: "#111118", border: "1px solid #1e2030" }}>
+                  {ASSETS.map(a => (
+                    <SelectItem key={a.symbol} value={a.symbol} className="text-white focus:bg-white/10">
+                      <span className="font-semibold">{a.symbol}</span>
+                      <span className="text-slate-400 ml-2 text-xs">{a.name}</span>
+                      {prices[a.symbol] && (
+                        <span className="text-indigo-300 ml-2 text-xs">${prices[a.symbol].toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                      )}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           </div>
 
           {/* Live price + chart */}
