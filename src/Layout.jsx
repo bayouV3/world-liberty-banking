@@ -200,7 +200,17 @@ export default function Layout({ children, currentPageName }) {
 
       {/* Page content */}
       <main className="pt-[52px] pb-16 md:pb-0" style={{ paddingTop: "calc(52px + env(safe-area-inset-top))" }}>
-        {children}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -16 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {showSettings && <AccountSettingsModal user={user} onClose={() => setShowSettings(false)} />}
