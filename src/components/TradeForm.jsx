@@ -40,7 +40,9 @@ export default function TradeForm({ positions }) {
   const [stopLoss, setStopLoss] = useState("");
   const [takeProfit, setTakeProfit] = useState("");
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
   const queryClient = useQueryClient();
+  const isMobile = useIsMobile();
 
   const { prices, loading: pricesLoading } = useAssetPrices(ALL_SYMBOLS);
   const currentPrice = symbol ? (prices[symbol] || 0) : 0;
