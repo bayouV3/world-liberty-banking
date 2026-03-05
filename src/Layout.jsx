@@ -98,7 +98,7 @@ export default function Layout({ children, currentPageName }) {
           transition: "background 0.3s, border-color 0.3s",
         }}
       >
-        <div className="max-w-7xl mx-auto h-full px-5 flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-5 flex items-center justify-between gap-6" style={{ height: 52 }}>
 
           {/* Logo */}
           <Link to={createPageUrl("Dashboard")} className="flex items-center gap-2.5 shrink-0 group">
