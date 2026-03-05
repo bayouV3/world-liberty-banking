@@ -28,7 +28,12 @@ export default function TokenShowcase() {
   const totalTokens = holders.reduce((s, h) => s + (h.tokens_held ?? 0), 0);
   const totalValue = holders.reduce((s, h) => s + (h.token_value_usd ?? 0), 0);
 
+  const handleRefresh = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["token_holders"] });
+  };
+
   return (
+    <PullToRefresh onRefresh={handleRefresh}>
     <div className="min-h-screen text-white" style={{ background: "#1a1c1e" }}>
       {/* ── Header ──────────────────────────────────────── */}
       <div className="relative px-5 pt-8 pb-10 overflow-hidden"
