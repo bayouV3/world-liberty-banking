@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import TokenGate from "@/components/TokenGate";
 import CoinBalanceWidgets from "@/components/dashboard/CoinBalanceWidgets";
 import WalletConnectModal from "@/components/WalletConnectModal";
+import PullToRefresh from "@/components/PullToRefresh";
 
 const QUICK_ACTIONS = [
   { icon: Plus, label: "Add Money", tab: "wallet", color: "#6366f1" },
