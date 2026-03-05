@@ -179,5 +179,6 @@ export default function Watchlist() {
         />
       )}
     </div>
+    </PullToRefresh>
   );
 }
