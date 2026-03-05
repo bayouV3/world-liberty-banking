@@ -52,6 +52,7 @@ import ETFPortfolios from './pages/ETFPortfolios';
 import Terminal from './pages/Terminal';
 import TokenShowcase from './pages/TokenShowcase';
 import Watchlist from './pages/Watchlist';
+import Subscription from './pages/Subscription';
 import __Layout from './Layout.jsx';
 
 
@@ -61,6 +62,7 @@ export const PAGES = {
     "Terminal": Terminal,
     "TokenShowcase": TokenShowcase,
     "Watchlist": Watchlist,
+    "Subscription": Subscription,
 }
 
 export const pagesConfig = {
