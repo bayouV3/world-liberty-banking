@@ -146,6 +146,7 @@ export default function Layout({ children, currentPageName }) {
             {/* User chip */}
             <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl cursor-pointer transition-all"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid #1e2227" }}
+              onClick={() => setShowSettings(true)}
               onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "#2e333a"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "#1e2227"; }}
             >
@@ -158,6 +159,7 @@ export default function Layout({ children, currentPageName }) {
               {firstName && (
                 <span className="text-sm hidden md:block font-medium" style={{ color: "#c8ced6" }}>{firstName}</span>
               )}
+              <Settings className="w-3.5 h-3.5 hidden md:block" style={{ color: "#64748b" }} />
             </div>
           </div>
         </div>
