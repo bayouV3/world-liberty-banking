@@ -134,6 +134,9 @@ export default function Layout({ children, currentPageName }) {
 
           {/* Right side */}
           <div className="flex items-center gap-2 shrink-0">
+            {/* Search */}
+            <GlobalSearch />
+
             {/* Bell */}
             <button
               className="relative w-8 h-8 rounded-lg flex items-center justify-center transition-all"
