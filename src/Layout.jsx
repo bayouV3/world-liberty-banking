@@ -4,6 +4,7 @@ import { BarChart3, Trophy, Zap, Bell, CreditCard, Home, Monitor, Star, Crown, S
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import AccountSettingsModal from "@/components/AccountSettingsModal";
+import GlobalSearch from "@/components/GlobalSearch";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
