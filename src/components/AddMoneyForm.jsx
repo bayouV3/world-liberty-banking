@@ -23,19 +23,27 @@ export default function AddMoneyForm({ balance }) {
         throw new Error("Insufficient balance");
       }
       const newBalance = type === "deposit" ? currentBalance + amountNum : currentBalance - amountNum;
-      
       if (balance?.id) {
         await base44.entities.Balance.update(balance.id, { amount: newBalance });
       } else {
         await base44.entities.Balance.create({ amount: amountNum });
       }
     },
+    onMutate: async () => {
+      const amountNum = parseFloat(amount);
+      await queryClient.cancelQueries({ queryKey: ['balance'] });
+      const previous = queryClient.getQueryData(['balance']);
+      const newBalance = type === "deposit" ? currentBalance + amountNum : currentBalance - amountNum;
+      queryClient.setQueryData(['balance'], (old) => old?.map((b, i) => i === 0 ? { ...b, amount: newBalance } : b) || [{ amount: newBalance }]);
+      return { previous };
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['balance'] });
       toast.success(type === "deposit" ? `Added $${amount} to balance` : `Withdrew $${amount}`);
       setAmount("");
     },
-    onError: (err) => {
+    onError: (err, _vars, context) => {
+      if (context?.previous) queryClient.setQueryData(['balance'], context.previous);
       toast.error(err.message || "Transaction failed");
     }
   });
