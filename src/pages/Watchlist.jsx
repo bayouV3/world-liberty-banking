@@ -59,7 +59,12 @@ export default function Watchlist() {
   const gainers = items.filter(i => (changes[i.symbol] || 0) > 0).length;
   const losers = items.filter(i => (changes[i.symbol] || 0) < 0).length;
 
+  const handleRefresh = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+  };
+
   return (
+    <PullToRefresh onRefresh={handleRefresh}>
     <div className="min-h-screen" style={{ background: "#1a1c1e" }}>
       {/* Header */}
       <div className="relative px-5 pt-8 pb-6 overflow-hidden"
