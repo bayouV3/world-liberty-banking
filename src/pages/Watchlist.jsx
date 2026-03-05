@@ -178,7 +178,7 @@ export default function Watchlist() {
           onClose={() => setShowAdd(false)}
         />
       )}
-    </div>
+      </div>
     </PullToRefresh>
   );
 }
