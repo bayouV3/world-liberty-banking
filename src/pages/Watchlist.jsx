@@ -7,6 +7,7 @@ import { useLivePrices, ALL_ASSETS } from "@/components/watchlist/useLivePrices"
 import WatchlistRow from "@/components/watchlist/WatchlistRow";
 import AddAssetModal from "@/components/watchlist/AddAssetModal";
 import { motion } from "framer-motion";
+import PullToRefresh from "@/components/PullToRefresh";
 
 const TYPE_TABS = ["All", "Stocks", "Crypto", "Forex"];
 
