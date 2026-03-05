@@ -2,12 +2,23 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowDownLeft, ArrowUpRight, Loader2, RefreshCw } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, Loader2, RefreshCw, ChevronDown } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import AssetChart from "@/components/trading/AssetChart";
 import { useAssetPrices } from "@/components/trading/useAssetPrices";
+import AssetDrawer from "@/components/trading/AssetDrawer";
+
+function useIsMobile() {
+  const [mobile, setMobile] = useState(() => window.innerWidth < 768);
+  useEffect(() => {
+    const fn = () => setMobile(window.innerWidth < 768);
+    window.addEventListener("resize", fn);
+    return () => window.removeEventListener("resize", fn);
+  }, []);
+  return mobile;
+}
 
 const ASSETS = [
   { symbol: "AAPL", name: "Apple" },
