@@ -45,13 +45,17 @@ export default function OrderBookPanel() {
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b" style={{ borderColor: "#1a2a1a", background: "#0a0c0d" }}>
         <span className="text-xs font-bold font-mono uppercase tracking-widest" style={{ color: "#ff6600" }}>Order Book</span>
-        <select
-          value={symbol}
-          onChange={e => setSymbol(e.target.value)}
-          className="text-xs font-mono rounded px-2 py-0.5 outline-none cursor-pointer"
-          style={{ background: "#1a2a1a", color: "#c8d0c8", border: "1px solid #2a3a2a" }}>
-          {Object.keys(SYMBOL_PRICES).map(s => <option key={s} value={s}>{s}</option>)}
-        </select>
+        <Select value={symbol} onValueChange={setSymbol}>
+          <SelectTrigger className="w-24 h-6 text-xs font-mono px-2 py-0.5 rounded"
+            style={{ background: "#1a2a1a", color: "#c8d0c8", border: "1px solid #2a3a2a" }}>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent style={{ background: "#1a2a1a", border: "1px solid #2a3a2a" }}>
+            {Object.keys(SYMBOL_PRICES).map(s => (
+              <SelectItem key={s} value={s} className="text-xs font-mono" style={{ color: "#c8d0c8" }}>{s}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="flex-1 overflow-hidden flex flex-col">
