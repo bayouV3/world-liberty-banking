@@ -49,20 +49,20 @@
  */
 import Dashboard from './pages/Dashboard';
 import ETFPortfolios from './pages/ETFPortfolios';
+import Subscription from './pages/Subscription';
 import Terminal from './pages/Terminal';
 import TokenShowcase from './pages/TokenShowcase';
 import Watchlist from './pages/Watchlist';
-import Subscription from './pages/Subscription';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Dashboard": Dashboard,
     "ETFPortfolios": ETFPortfolios,
+    "Subscription": Subscription,
     "Terminal": Terminal,
     "TokenShowcase": TokenShowcase,
     "Watchlist": Watchlist,
-    "Subscription": Subscription,
 }
 
 export const pagesConfig = {
