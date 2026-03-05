@@ -74,7 +74,7 @@ export default function Dashboard() {
 
   return (
     <PullToRefresh onRefresh={handleRefresh}>
-    <div className="min-h-screen bg-[#0a0a0f]">
+      <div className="min-h-screen bg-[#0a0a0f]">
 
       {/* ── Balance Hero ─────────────────────────────────────── */}
       <div className="relative px-5 pt-8 pb-6 overflow-hidden"
