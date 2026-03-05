@@ -65,7 +65,7 @@ export default function Watchlist() {
 
   return (
     <PullToRefresh onRefresh={handleRefresh}>
-    <div className="min-h-screen" style={{ background: "#1a1c1e" }}>
+      <div className="min-h-screen" style={{ background: "#1a1c1e" }}>
       {/* Header */}
       <div className="relative px-5 pt-8 pb-6 overflow-hidden"
         style={{ background: "linear-gradient(145deg, #232628, #1e2022)", borderBottom: "1px solid #3a3d42" }}>
