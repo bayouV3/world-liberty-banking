@@ -197,9 +197,11 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* Page content */}
-      <main className="pt-[52px] pb-16 md:pb-0">
+      <main className="pt-[52px] pb-16 md:pb-0" style={{ paddingTop: "calc(52px + env(safe-area-inset-top))" }}>
         {children}
       </main>
+
+      {showSettings && <AccountSettingsModal user={user} onClose={() => setShowSettings(false)} />}
     </div>
   );
 }
