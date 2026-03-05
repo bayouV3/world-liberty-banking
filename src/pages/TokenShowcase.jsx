@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { Trophy, Coins, Users, Flame, Crown, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
@@ -7,6 +7,7 @@ import LeaderboardRow from "@/components/showcase/LeaderboardRow";
 import TopHolderCard from "@/components/showcase/TopHolderCard";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import PullToRefresh from "@/components/PullToRefresh";
 
 const FILTERS = ["All", "Diamond", "Gold", "Silver", "Bronze", "Collector"];
 
