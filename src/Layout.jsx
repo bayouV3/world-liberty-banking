@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Showcase", page: "TokenShowcase", icon: Trophy },
   { label: "Watchlist", page: "Watchlist", icon: Star },
   { label: "Terminal", page: "Terminal", icon: Monitor },
+  { label: "Pro", page: "Subscription", icon: Crown },
 ];
 
 export default function Layout({ children, currentPageName }) {
