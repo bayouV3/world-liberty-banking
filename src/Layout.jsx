@@ -18,6 +18,7 @@ const navLinks = [
 export default function Layout({ children, currentPageName }) {
   const [user, setUser] = useState(null);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
