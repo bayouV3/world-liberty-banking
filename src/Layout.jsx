@@ -33,6 +33,7 @@ export default function Layout({ children, currentPageName }) {
     : "WF";
 
   const firstName = user?.full_name?.split(" ")[0] || null;
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
     <div className="min-h-screen" style={{ background: "#0d0f11", color: "#e2e8f0", fontFamily: "'Inter', -apple-system, sans-serif" }}>
