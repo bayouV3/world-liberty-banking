@@ -129,7 +129,7 @@ export default function TokenShowcase() {
           </div>
         )}
       </div>
-    </div>
+      </div>
     </PullToRefresh>
   );
 }
