@@ -13,6 +13,7 @@ const FILTERS = ["All", "Diamond", "Gold", "Silver", "Bronze", "Collector"];
 
 export default function TokenShowcase() {
   const [filter, setFilter] = useState("All");
+  const queryClient = useQueryClient();
 
   const { data: holders = [], isLoading } = useQuery({
     queryKey: ["token_holders"],
