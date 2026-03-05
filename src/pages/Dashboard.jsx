@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import PortfolioStats from "@/components/dashboard/PortfolioStats";
 import PositionsList from "@/components/PositionsList";
