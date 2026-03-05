@@ -89,9 +89,9 @@ export default function Layout({ children, currentPageName }) {
 
       {/* ── Top Navbar ──────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 h-13"
+        className="fixed top-0 left-0 right-0 z-50"
         style={{
-          height: 52,
+          paddingTop: "env(safe-area-inset-top)",
           background: scrolled ? "rgba(13,15,17,0.97)" : "rgba(13,15,17,0.85)",
           backdropFilter: "blur(20px)",
           borderBottom: scrolled ? "1px solid #1e2227" : "1px solid transparent",
