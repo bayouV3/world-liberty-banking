@@ -270,6 +270,7 @@ export default function Dashboard() {
           onConnected={(holder) => setTokenHolder(holder)}
         />
       )}
-    </div>
+      </div>
+    </PullToRefresh>
   );
 }
