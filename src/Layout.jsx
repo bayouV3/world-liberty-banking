@@ -168,7 +168,7 @@ export default function Layout({ children, currentPageName }) {
       {/* ── Mobile Bottom Nav ────────────────────────── */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center px-2"
         style={{
-          height: 60,
+          paddingBottom: "env(safe-area-inset-bottom)",
           background: "rgba(13,15,17,0.98)",
           backdropFilter: "blur(20px)",
           borderTop: "1px solid #1e2227",
