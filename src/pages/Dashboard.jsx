@@ -61,7 +61,19 @@ export default function Dashboard() {
   const change = 1247.32; // simulated daily change
   const changePct = 2.14;
 
+  const queryClient = useQueryClient();
+
+  const handleRefresh = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: ['positions'] }),
+      queryClient.invalidateQueries({ queryKey: ['balance'] }),
+      queryClient.invalidateQueries({ queryKey: ['payments'] }),
+      queryClient.invalidateQueries({ queryKey: ['etf_portfolios'] }),
+    ]);
+  };
+
   return (
+    <PullToRefresh onRefresh={handleRefresh}>
     <div className="min-h-screen bg-[#0a0a0f]">
 
       {/* ── Balance Hero ─────────────────────────────────────── */}
