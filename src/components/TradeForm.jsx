@@ -59,11 +59,39 @@ export default function TradeForm({ positions }) {
         else await base44.entities.Position.update(holding.id, { quantity: newQty, current_price: price });
       }
     },
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ['positions'] });
+      const previous = queryClient.getQueryData(['positions']);
+      const price = currentPrice;
+      const qty = parseFloat(quantity);
+      queryClient.setQueryData(['positions'], (old = []) => {
+        if (action === "buy") {
+          const existing = old.find(p => p.symbol === symbol);
+          if (existing) {
+            const newQty = existing.quantity + qty;
+            const newAvg = ((existing.quantity * existing.avg_cost) + qty * price) / newQty;
+            return old.map(p => p.symbol === symbol ? { ...p, quantity: newQty, avg_cost: newAvg, current_price: price } : p);
+          }
+          return [...old, { id: `tmp-${Date.now()}`, symbol, name: asset?.name, quantity: qty, avg_cost: price, current_price: price }];
+        } else {
+          const existing = old.find(p => p.symbol === symbol);
+          if (!existing) return old;
+          const newQty = existing.quantity - qty;
+          if (newQty <= 0) return old.filter(p => p.symbol !== symbol);
+          return old.map(p => p.symbol === symbol ? { ...p, quantity: newQty, current_price: price } : p);
+        }
+      });
+      return { previous };
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['positions'] });
       queryClient.invalidateQueries({ queryKey: ['trades'] });
       toast.success(`${action === 'buy' ? 'Bought' : 'Sold'} ${quantity} ${symbol}`);
       setQuantity(""); setSymbol(""); setStopLoss(""); setTakeProfit("");
+    },
+    onError: (_err, _vars, context) => {
+      if (context?.previous) queryClient.setQueryData(['positions'], context.previous);
+      toast.error("Trade failed");
     }
   });
 
