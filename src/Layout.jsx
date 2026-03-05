@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Zap, Bell, Home, CreditCard, Trophy, Star, Monitor, ChevronRight } from "lucide-react";
+import { BarChart3, Trophy, Zap, Bell, CreditCard, Home, Monitor, Star, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 
@@ -33,220 +33,166 @@ export default function Layout({ children, currentPageName }) {
   const firstName = user?.full_name?.split(" ")[0] || null;
 
   return (
-    <div className="min-h-screen text-white" style={{ background: "#111214", fontFamily: "'Inter', -apple-system, sans-serif" }}>
+    <div className="min-h-screen" style={{ background: "#0d0f11", color: "#e2e8f0", fontFamily: "'Inter', -apple-system, sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
         * { font-family: 'Inter', -apple-system, sans-serif; box-sizing: border-box; }
-        body { background: #111214; }
-
+        body { background: #0d0f11; margin: 0; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #2e3035; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #2a2d32; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #3a3d44; }
 
-        /* Core surfaces */
-        .surface-base   { background: #111214; }
-        .surface-1      { background: #18191d; }
-        .surface-2      { background: #1e2024; }
-        .surface-3      { background: #24262b; }
-        .surface-raised { background: linear-gradient(145deg,#242628,#1b1d20); border:1px solid #2e3035; border-radius:16px; }
-        .surface-card   { background: #18191d; border: 1px solid #252629; border-radius: 14px; }
-
-        /* Borders */
-        .border-subtle  { border-color: #252629; }
-        .border-muted   { border-color: #2e3035; }
-
-        /* Accent spectrum */
-        .accent-blue    { color: #7eb3ff; }
-        .accent-green   { color: #52c98b; }
-        .accent-red     { color: #e87070; }
-        .accent-amber   { color: #d4a94a; }
-        .accent-purple  { color: #a78bfa; }
-        .accent-silver  { color: #9ba3b0; }
-
-        /* Glass */
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06); }
-
-        /* Buttons */
-        .btn-steel {
-          background: linear-gradient(135deg,#2e3035,#232528);
-          border: 1px solid #3a3d44;
-          color: #d0d4db;
-          font-weight: 600;
-          border-radius: 10px;
-          transition: all .15s;
+        .nav-link { position: relative; transition: color 0.2s; }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: -2px; left: 50%; right: 50%;
+          height: 1.5px;
+          background: linear-gradient(90deg, #6366f1, #8b5cf6);
+          border-radius: 2px;
+          transition: left 0.25s ease, right 0.25s ease;
         }
-        .btn-steel:hover { background: linear-gradient(135deg,#363a40,#2a2d31); color: #e8eaec; }
+        .nav-link.active::after { left: 0; right: 0; }
+        .nav-link:hover::after { left: 10%; right: 10%; }
 
-        .btn-accent {
-          background: linear-gradient(135deg,#5a7af0,#7c5ff5);
-          border: 1px solid rgba(122,94,245,.35);
-          color: #fff;
-          font-weight: 600;
-          border-radius: 10px;
-          transition: opacity .15s;
-        }
-        .btn-accent:hover { opacity: .88; }
-
-        /* Nav active indicator */
-        .nav-active-dot {
-          width: 3px;
-          height: 3px;
-          background: #52c98b;
-          border-radius: 99px;
+        .avatar-ring {
+          background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          padding: 1.5px;
+          border-radius: 50%;
         }
 
-        /* Shimmer for loading skeletons */
-        @keyframes shimmer {
-          0%   { background-position: -400px 0; }
-          100% { background-position: 400px 0; }
-        }
-        .skeleton {
-          background: linear-gradient(90deg,#1e2024 25%,#252629 50%,#1e2024 75%);
-          background-size: 800px 100%;
-          animation: shimmer 1.6s infinite;
-          border-radius: 8px;
-        }
+        /* Steel palette vars */
+        .steel-card { background: linear-gradient(145deg, #16191d 0%, #131619 100%); border: 1px solid #1e2227; border-radius: 16px; }
+        .steel-card-raised { background: linear-gradient(145deg, #1c1f24 0%, #161921 100%); border: 1px solid #252930; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04); }
+        .steel-btn { background: linear-gradient(135deg, #252930 0%, #1c2026 100%); border: 1px solid #2e333a; color: #c8ced6; font-weight: 600; border-radius: 10px; transition: all 0.15s; }
+        .steel-btn:hover { background: linear-gradient(135deg, #2d333b 0%, #232830 100%); border-color: #3a4048; }
+        .steel-btn-accent { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border: none; color: white; font-weight: 600; border-radius: 10px; transition: opacity 0.15s; box-shadow: 0 2px 12px rgba(99,102,241,0.25); }
+        .steel-btn-accent:hover { opacity: 0.88; }
 
-        /* Ticker/terminal font */
-        .font-mono-num { font-variant-numeric: tabular-nums; font-family: 'SF Mono', 'Fira Code', monospace; }
+        .accent-blue { color: #818cf8; }
+        .accent-green { color: #4ade80; }
+        .accent-red { color: #f87171; }
+        .accent-amber { color: #fbbf24; }
+        .accent-silver { color: #94a3b8; }
+
+        .surface { background: #131619; }
+        .surface-2 { background: #191c21; }
+        .surface-hover:hover { background: #1c2026; }
+        .divider { border-color: #1e2227; }
+        .text-muted { color: #64748b; }
+        .text-soft { color: #94a3b8; }
       `}</style>
 
-      {/* ── Top Navbar ───────────────────────────────────────── */}
+      {/* ── Top Navbar ──────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 h-13 flex items-center transition-all duration-200"
+        className="fixed top-0 left-0 right-0 z-50 h-13"
         style={{
           height: 52,
-          background: scrolled ? "rgba(17,18,20,0.97)" : "rgba(17,18,20,0.92)",
-          backdropFilter: "blur(28px)",
-          borderBottom: scrolled ? "1px solid #252629" : "1px solid rgba(37,38,41,0.6)",
-          boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.4)" : "none",
+          background: scrolled ? "rgba(13,15,17,0.97)" : "rgba(13,15,17,0.85)",
+          backdropFilter: "blur(20px)",
+          borderBottom: scrolled ? "1px solid #1e2227" : "1px solid transparent",
+          transition: "background 0.3s, border-color 0.3s",
         }}
       >
-        <div className="max-w-7xl mx-auto w-full px-4 flex items-center gap-6">
+        <div className="max-w-7xl mx-auto h-full px-5 flex items-center justify-between gap-6">
 
           {/* Logo */}
-          <Link to={createPageUrl("Dashboard")} className="flex items-center gap-2 shrink-0 group">
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center transition-all group-hover:scale-105"
-              style={{
-                background: "linear-gradient(145deg,#3a3d44,#27292d)",
-                border: "1px solid #44474e",
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
-              }}
-            >
-              <Zap className="w-3.5 h-3.5" style={{ color: "#c0c6d0" }} />
+          <Link to={createPageUrl("Dashboard")} className="flex items-center gap-2.5 shrink-0 group">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105"
+              style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", boxShadow: "0 2px 10px rgba(99,102,241,0.35)" }}>
+              <Zap className="w-3.5 h-3.5 text-white" fill="white" />
             </div>
-            <span className="font-bold text-sm tracking-tight">
-              <span style={{ color: "#e2e5ea" }}>World</span><span style={{ color: "#4a5568" }}>Fi</span>
+            <span className="font-bold text-[15px] tracking-tight">
+              <span style={{ color: "#f1f5f9" }}>World</span><span style={{ color: "#6366f1" }}>Fi</span>
             </span>
           </Link>
 
-          {/* Divider */}
-          <div className="hidden md:block w-px h-5 shrink-0" style={{ background: "#252629" }} />
-
           {/* Nav links */}
-          <div className="hidden md:flex items-center gap-0.5 flex-1">
+          <div className="hidden md:flex items-center gap-0 flex-1 justify-center">
             {navLinks.map(({ label, page, icon: Icon }) => {
               const active = currentPageName === page;
               return (
                 <Link
                   key={page}
                   to={createPageUrl(page)}
-                  className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all duration-150"
-                  style={{
-                    color: active ? "#e2e5ea" : "#5a6070",
-                    background: active ? "rgba(255,255,255,0.055)" : "transparent",
-                  }}
-                  onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#9ba3b0"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
-                  onMouseLeave={e => { if (!active) { e.currentTarget.style.color = "#5a6070"; e.currentTarget.style.background = "transparent"; } }}
+                  className={`nav-link ${active ? "active" : ""} flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium transition-colors`}
+                  style={{ color: active ? "#f1f5f9" : "#64748b" }}
                 >
-                  <Icon className="w-3.5 h-3.5 shrink-0" />
+                  <Icon className="w-3.5 h-3.5" style={{ color: active ? "#818cf8" : "currentColor" }} />
                   {label}
-                  {active && (
-                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 nav-active-dot" />
-                  )}
                 </Link>
               );
             })}
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2 ml-auto">
-            {/* Notification bell */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Bell */}
             <button
-              className="relative p-1.5 rounded-lg transition-all"
-              style={{ color: "#4a5568", background: "transparent" }}
-              onMouseEnter={e => { e.currentTarget.style.color = "#9ba3b0"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
-              onMouseLeave={e => { e.currentTarget.style.color = "#4a5568"; e.currentTarget.style.background = "transparent"; }}
+              className="relative w-8 h-8 rounded-lg flex items-center justify-center transition-all"
+              style={{ color: "#64748b", background: "rgba(255,255,255,0.03)" }}
+              onMouseEnter={e => { e.currentTarget.style.color = "#94a3b8"; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
+              onMouseLeave={e => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
             >
               <Bell className="w-4 h-4" />
-              <span
-                className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full"
-                style={{ background: "#52c98b", boxShadow: "0 0 4px rgba(82,201,139,0.6)" }}
-              />
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full"
+                style={{ background: "#6366f1", boxShadow: "0 0 4px rgba(99,102,241,0.6)" }} />
             </button>
 
             {/* User chip */}
-            <div
-              className="flex items-center gap-2 pl-2 pr-3 py-1 rounded-xl cursor-pointer transition-all"
-              style={{
-                background: "linear-gradient(145deg,#1e2024,#171a1d)",
-                border: "1px solid #2e3035",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "#3a3d44"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "#2e3035"; }}
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl cursor-pointer transition-all"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid #1e2227" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "#2e333a"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "#1e2227"; }}
             >
-              <div
-                className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold"
-                style={{
-                  background: "linear-gradient(145deg,#3a3d44,#27292d)",
-                  color: "#c0c6d0",
-                  border: "1px solid #44474e",
-                }}
-              >
-                {initials}
+              <div className="avatar-ring">
+                <div className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                  style={{ background: "linear-gradient(135deg, #1c1f24, #131619)" }}>
+                  {initials}
+                </div>
               </div>
               {firstName && (
-                <span className="hidden md:block text-[13px] font-medium" style={{ color: "#9ba3b0" }}>{firstName}</span>
+                <span className="text-sm hidden md:block font-medium" style={{ color: "#c8ced6" }}>{firstName}</span>
               )}
             </div>
           </div>
         </div>
       </nav>
 
-      {/* ── Mobile Bottom Nav ─────────────────────────────────── */}
-      <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center px-2"
+      {/* ── Mobile Bottom Nav ────────────────────────── */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center px-2"
         style={{
           height: 60,
-          background: "rgba(17,18,20,0.98)",
-          backdropFilter: "blur(28px)",
-          borderTop: "1px solid #252629",
-        }}
-      >
+          background: "rgba(13,15,17,0.98)",
+          backdropFilter: "blur(20px)",
+          borderTop: "1px solid #1e2227",
+        }}>
         {navLinks.map(({ label, page, icon: Icon }) => {
           const active = currentPageName === page;
           return (
             <Link
               key={page}
               to={createPageUrl(page)}
-              className="flex-1 flex flex-col items-center justify-center gap-1 py-1 rounded-xl mx-0.5 transition-all"
-              style={{
-                color: active ? "#e2e5ea" : "#3a4050",
-                background: active ? "rgba(255,255,255,0.05)" : "transparent",
-              }}
+              className="flex-1 flex flex-col items-center justify-center gap-1 py-1 transition-all"
+              style={{ color: active ? "#818cf8" : "#3a4048" }}
             >
-              <Icon className="w-5 h-5" />
-              <span className="text-[9px] font-semibold tracking-wide">{label}</span>
+              <div className="relative">
+                <Icon className="w-5 h-5" />
+                {active && (
+                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                    style={{ background: "#6366f1" }} />
+                )}
+              </div>
+              <span className="text-[9px] font-semibold tracking-wide uppercase"
+                style={{ color: active ? "#818cf8" : "#3a4048" }}>{label}</span>
             </Link>
           );
         })}
       </nav>
 
-      {/* ── Page content ──────────────────────────────────────── */}
-      <main className="pt-[52px] pb-[60px] md:pb-0">
+      {/* Page content */}
+      <main className="pt-[52px] pb-16 md:pb-0">
         {children}
       </main>
     </div>
