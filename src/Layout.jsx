@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { BarChart3, Trophy, Zap, Bell, CreditCard, Home, Monitor, Star, Crown, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import AccountSettingsModal from "@/components/AccountSettingsModal";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
   { label: "Home", page: "Dashboard", icon: Home },
