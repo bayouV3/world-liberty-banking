@@ -1,0 +1,54 @@
+{
+  "name": "Trade",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Stock/asset symbol"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number"
+    },
+    "total_value": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "executed",
+        "cancelled"
+      ],
+      "default": "executed"
+    }
+  },
+  "required": [
+    "symbol",
+    "type",
+    "quantity",
+    "price",
+    "total_value"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Position",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "avg_cost": {
+      "type": "number"
+    },
+    "current_price": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "quantity",
+    "avg_cost"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Transaction",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell",
+        "send",
+        "receive",
+        "deposit",
+        "withdraw"
+      ],
+      "description": "Type of transaction"
+    },
+    "asset": {
+      "type": "string",
+      "description": "Asset symbol (e.g., BTC, ETH, USD)"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount of the transaction"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price per unit at time of transaction"
+    },
+    "total_value": {
+      "type": "number",
+      "description": "Total value in USD"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "default": "completed"
+    },
+    "recipient": {
+      "type": "string",
+      "description": "Recipient email or wallet for payments"
+    },
+    "note": {
+      "type": "string",
+      "description": "Optional note for the transaction"
+    }
+  },
+  "required": [
+    "type",
+    "amount",
+    "total_value"
+  ]
+}

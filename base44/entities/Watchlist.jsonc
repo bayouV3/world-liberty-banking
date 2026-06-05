@@ -1,0 +1,35 @@
+{
+  "name": "Watchlist",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Stock/asset symbol"
+    },
+    "name": {
+      "type": "string",
+      "description": "Asset full name"
+    },
+    "asset_type": {
+      "type": "string",
+      "enum": [
+        "stock",
+        "crypto",
+        "forex",
+        "commodity"
+      ],
+      "default": "stock"
+    },
+    "target_price": {
+      "type": "number",
+      "description": "Target price alert"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "symbol",
+    "name"
+  ]
+}

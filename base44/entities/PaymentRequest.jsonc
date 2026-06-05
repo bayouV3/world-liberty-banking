@@ -1,0 +1,65 @@
+{
+  "name": "PaymentRequest",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "number",
+      "description": "Requested amount in USD"
+    },
+    "from_email": {
+      "type": "string",
+      "description": "Email of the person to request from"
+    },
+    "note": {
+      "type": "string",
+      "description": "Note or description for the request"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "paid",
+        "declined",
+        "cancelled"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "amount",
+    "from_email"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.from_email": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.from_email": "{{user.email}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.from_email": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

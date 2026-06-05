@@ -1,0 +1,68 @@
+{
+  "name": "TokenHolder",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "Display name of the token holder"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "Profile image URL"
+    },
+    "tokens_held": {
+      "type": "number",
+      "description": "Total number of tokens held"
+    },
+    "token_value_usd": {
+      "type": "number",
+      "description": "Total USD value of tokens"
+    },
+    "rank": {
+      "type": "number",
+      "description": "Leaderboard rank"
+    },
+    "badge": {
+      "type": "string",
+      "enum": [
+        "diamond",
+        "gold",
+        "silver",
+        "bronze",
+        "collector"
+      ],
+      "description": "Achievement badge tier"
+    },
+    "favorite_token": {
+      "type": "string",
+      "description": "Their most held token symbol"
+    },
+    "change_24h": {
+      "type": "number",
+      "description": "Portfolio change in last 24h (%)"
+    }
+  },
+  "required": [
+    "username",
+    "tokens_held",
+    "token_value_usd"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

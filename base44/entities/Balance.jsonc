@@ -1,0 +1,13 @@
+{
+  "name": "Balance",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "number",
+      "description": "Current cash balance"
+    }
+  },
+  "required": [
+    "amount"
+  ]
+}

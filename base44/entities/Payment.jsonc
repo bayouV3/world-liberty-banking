@@ -1,0 +1,42 @@
+{
+  "name": "Payment",
+  "type": "object",
+  "properties": {
+    "recipient_email": {
+      "type": "string",
+      "description": "Email of recipient"
+    },
+    "sender_email": {
+      "type": "string",
+      "description": "Email of sender"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "note": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "declined"
+      ],
+      "default": "pending"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "send",
+        "request"
+      ],
+      "description": "Send money or request money"
+    }
+  },
+  "required": [
+    "recipient_email",
+    "amount",
+    "type"
+  ]
+}

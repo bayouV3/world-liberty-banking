@@ -1,0 +1,53 @@
+{
+  "name": "Holding",
+  "type": "object",
+  "properties": {
+    "asset": {
+      "type": "string",
+      "description": "Asset symbol (e.g., BTC, ETH, AAPL)"
+    },
+    "asset_name": {
+      "type": "string",
+      "description": "Full name of the asset"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Amount held"
+    },
+    "average_cost": {
+      "type": "number",
+      "description": "Average purchase price"
+    },
+    "current_price": {
+      "type": "number",
+      "description": "Current market price"
+    },
+    "asset_type": {
+      "type": "string",
+      "enum": [
+        "crypto",
+        "stock",
+        "cash"
+      ],
+      "description": "Type of asset"
+    }
+  },
+  "required": [
+    "asset",
+    "asset_name",
+    "quantity",
+    "asset_type"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

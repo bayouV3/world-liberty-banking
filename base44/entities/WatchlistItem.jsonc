@@ -1,0 +1,47 @@
+{
+  "name": "WatchlistItem",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Asset symbol (e.g. AAPL, BTC, EUR/USD)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Asset full name"
+    },
+    "asset_type": {
+      "type": "string",
+      "enum": [
+        "stock",
+        "crypto",
+        "forex"
+      ],
+      "default": "stock"
+    },
+    "target_price": {
+      "type": "number",
+      "description": "Optional price alert target"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "asset_type"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}
