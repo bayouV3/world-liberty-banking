@@ -30,7 +30,16 @@
     "from_email"
   ],
   "rls": {
-    "create": {},
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.from_email": "{{user.email}}"
+        }
+      ]
+    },
     "read": {
       "$or": [
         {
